@@ -1,0 +1,63 @@
+<style>
+  form{
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+</style>
+
+<form class="border border-4 p-3">
+  <h1>
+    Editar Produtos
+  </h1>
+  <div class="form-row">
+    <div class="row g-2">
+      <div class="row">
+        <div class="col-md-2 p-3">
+          <label >Cód. Produto</label>
+          <input type="number" class="form-control"  placeholder="Digite o código do produto">
+        </div>
+        <div class="col-md-5 p-3">
+          <div class="">
+            <label >Nome</label>
+            <input type="text" class="form-control" placeholder="Digite o nome do produto" readonly>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="row g-3">
+      <div class="row">
+        <div class="col-md-2 p-3">
+          <label>Quantidade</label>
+          <input type="number" class="form-control"  placeholder="Digite a quantidade do produto">
+        </div>
+        <div class="col-md-2">
+          <div class="p-3">
+            <label>Unidade</label>
+            <select class="form-select">
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="p-3">
+            <label>Grupo</label>
+            <select class="form-select">
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button type="button" class="btn btn-warning">Editar</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,19 @@
+<style>
+  div.jumbotron{
+    margin-top: 60px;
+  }
+  div{
+    margin-left: 70px;
+    margin-right:70px;
+  }
+</style>
+
+<div class="jumbotron bg bg-light rounded p-3">
+  <h1 class="display-4 ">Inventário Web</h1>
+  <p class="lead">Esse é o inventário web que ajuda na performance de manipular seu produto, sendo possível, criar, editar e excluí-los. </p>
+  <hr class="my-4">
+  <p>Para inserir um produto, basta clicar no botão a seguir: </p>
+  <p class="lead">
+    <a class="btn btn-dark btn-lg" [routerLink]="['/form']" role="button">Inserir produto</a>
+  </p>
+</div>

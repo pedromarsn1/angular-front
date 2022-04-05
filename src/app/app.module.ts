@@ -14,7 +14,8 @@ import { TabelaProdutosComponent } from './tabela-produtos/tabela-produtos.compo
 import { EditarProdutoComponent } from './editar-produto/editar-produto.component';
 import { ProdutosComponent } from './produtos/produtos.component';
 import { ProdutoComponent } from './produtos/produto/produto.component';
-import { ProdutosService } from "./produtos/produtos.service";
+import {HttpClientModule} from "@angular/common/http";
+import {ProdutoService} from "./shared/service/produto.service";
 
 
 @NgModule({
@@ -29,13 +30,14 @@ import { ProdutosService } from "./produtos/produtos.service";
     ProdutoComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     [MDBBootstrapModule.forRoot()],
     MdbCollapseModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [ProdutosService],
+  providers: [ProdutoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

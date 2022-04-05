@@ -28,40 +28,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <th scope="row">1</th>
-    <td>Mark</td>
-    <td>Otto</td>
-    <td>@mdo</td>
+  <tr *ngFor="let produto of produtos">
+    <td>{{produto.codProduto}}</td>
+    <td>{{produto.nome}}</td>
+    <td>{{produto.quantidade}}</td>
+    <td>{{produto.unidade}}</td>
     <td>
-      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <button type="button" class="btn btn-warning" [routerLink]="['/editar-prod']">Editar</button>
-        <button type="button" class="btn btn-danger">Apagar</button>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <th scope="row">2</th>
-    <td>Jacob</td>
-    <td>Thornton</td>
-    <td>@fat</td>
-    <td>
-      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <button type="button" class="btn btn-warning" [routerLink]="['/editar-prod']">Editar</button>
-        <button type="button" class="btn btn-danger">Apagar</button>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <th scope="row">3</th>
-    <td>Larry</td>
-    <td>the Bird</td>
-    <td>@twitter</td>
-    <td>
-      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <button type="button" class="btn btn-warning" [routerLink]="['/editar-prod']">Editar</button>
-        <button type="button" class="btn btn-danger">Apagar</button>
-      </div>
+      <button type="button" class="btn btn-warning btn-sm" (click)="editProduto(produto)">Editar</button>
+      <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteProduto(produto)">Deletar</button>
     </td>
   </tr>
   </tbody>

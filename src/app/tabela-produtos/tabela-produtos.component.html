@@ -26,16 +26,17 @@
     <th scope="col">Quantidade</th>
     <th scope="col">Unidade</th>
   </tr>
+
   </thead>
   <tbody>
-  <tr *ngFor="let produto of produtos">
+  <tr *ngFor="let produto ">
     <td>{{produto.codProduto}}</td>
     <td>{{produto.nome}}</td>
     <td>{{produto.quantidade}}</td>
     <td>{{produto.unidade}}</td>
     <td>
-      <button type="button" class="btn btn-warning btn-sm" (click)="editProduto(produto)">Editar</button>
-      <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteProduto(produto)">Deletar</button>
+      <button type="button" class="btn btn-warning btn-sm" [routerLink]="['/editar-prod']">Editar</button>
+      <button type="button" class="btn btn-danger btn-sm ml-1" >Deletar</button>
     </td>
   </tr>
   </tbody>
@@ -60,3 +61,9 @@
     </li>
   </ul>
 </nav>
+
+<button class="btn btn-success btn-sm" (click)="getAllProdutos()">Obter todes</button>
+<button class="btn btn-success btn-sm" (click)="getByIdProduto()">Obter apenas one</button>
+<button class="btn btn-success btn-sm" (click)="saveProduto()">Save Produto</button>
+<button class="btn btn-success btn-sm" (click)="updateProduto()">Atualizate Produto</button>
+<button class="btn btn-success btn-sm" (click)="deleteProduto()">Deletate Produto</button>

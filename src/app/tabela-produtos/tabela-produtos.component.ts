@@ -10,47 +10,56 @@ import {NgForm} from "@angular/forms";
 })
 export class TabelaProdutosComponent implements OnInit {
 
-  produto = {} as Produto
-  produtos: Produto[] = []
-
-  constructor( public produtoService : ProdutoService) { }
+  constructor(public produtoService: ProdutoService) {
+  }
 
   ngOnInit(): void {
 
   }
 
-  saveProduto(form: NgForm) {
-    if (this.produto._id !== undefined) {
-      this.produtoService.updateProduto(this.produto).subscribe(() => {
-        this.cleanForm(form);
-      });
-    } else {
-      this.produtoService.saveProduto(this.produto).subscribe(() => {
-        this.cleanForm(form);
-      });
+  getAllProdutos() {
+    this.produtoService.getAll()
+      .then(produtos => console.log(produtos))
+      .catch(error => console.error(error))
+  }
+
+  getByIdProduto() {
+    this.produtoService.getProdutoById(4)
+      .then(produtos => console.log(produtos))
+      .catch(error => console.error(error))
+  }
+
+  saveProduto() {
+    const produto: Produto = {
+      codProduto: 654,
+      quantidade: 85,
+      nome: "Jujuba Fini",
+      _id: 123
     }
+    this.produtoService.saveProduto(produto)
+      .then(produto => console.log('Adicionado'))
+      .catch(error => console.error(error));
   }
 
-  getProduto() {
-    this.produtoService.getProduto().subscribe((produtos: Produto[]) => {
-      this.produtos = produtos;
-    });
+  updateProduto() {
+    const produto: Produto = {
+      _id: 11,
+      nome: "Papel Higienico",
+      codProduto: 253,
+      unidade: "PC",
+      quantidade: 85,
+      grupo: "PUTS MANOR"
+    }
+
+    this.produtoService.updateProduto(produto)
+      // .then(produto => console.log("Atualizaded"))
+      // .catch(error => console.error(error))
+
   }
 
-  deleteProduto(produto: Produto) {
-    this.produtoService.updateProduto(produto).subscribe(() => {
-      this.getProduto();
-    });
+  deleteProduto() {
+    this.produtoService.deleteCar(16)
+      .then(res => console.log("apagaded", res))
+      .catch(error => console.error(error))
   }
-
-  editProduto(produto: Produto) {
-    this.produto = { ...produto };
-  }
-
-  cleanForm(form: NgForm) {
-    this.getProduto();
-    form.resetForm();
-    this.produto = {} as Produto;
-  }
-
 }

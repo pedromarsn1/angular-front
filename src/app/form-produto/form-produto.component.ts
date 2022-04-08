@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Produto} from "../produtos/produto/produto.model";
+import {ProdutoService} from "../shared/service/produto.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-form-produto',
@@ -6,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-produto.component.scss']
 })
 export class FormProdutoComponent implements OnInit {
+  produto = {} as Produto
+  produtos: Produto[] = []
 
-  constructor() { }
+  constructor( public produtoService : ProdutoService) { }
 
   ngOnInit(): void {
+
   }
 
 }

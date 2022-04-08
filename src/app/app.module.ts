@@ -16,6 +16,7 @@ import { ProdutosComponent } from './produtos/produtos.component';
 import { ProdutoComponent } from './produtos/produto/produto.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ProdutoService} from "./shared/service/produto.service";
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {ProdutoService} from "./shared/service/produto.service";
     AppRoutingModule,
     [MDBBootstrapModule.forRoot()],
     MdbCollapseModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    FormsModule
   ],
   providers: [ProdutoService],
   bootstrap: [AppComponent]

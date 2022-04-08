@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ProdutoService} from "../shared/service/produto.service";
+import {Produto} from "../produtos/produto/produto.model";
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  produtos : Produto [] = []
+  constructor(private produtoService : ProdutoService) { }
 
   ngOnInit(): void {
   }

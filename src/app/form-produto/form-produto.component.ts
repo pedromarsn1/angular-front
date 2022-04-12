@@ -18,4 +18,10 @@ export class FormProdutoComponent implements OnInit {
 
   }
 
+  saveProduto(){
+    this.produtoService.saveProduto(this.produto)
+    .then(produto => console.log("Adicionado", produto))
+    .catch(error=> console.error(error))  
+  }
+
 }

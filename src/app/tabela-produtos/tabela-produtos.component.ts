@@ -48,18 +48,17 @@ export class TabelaProdutosComponent implements OnInit {
       codProduto: 253,
       unidade: "PC",
       quantidade: 85,
-      grupo: "PUTS MANOR"
+      grupo: "Neve"
     }
 
-    this.produtoService.updateProduto(produto)
-      // .then(produto => console.log("Atualizaded"))
-      // .catch(error => console.error(error))
-
+  this.produtoService.updateProduto(produto)
+    //.then(produto => console.log("Atualizado",produto))
+    //.catch(error => console.error(error))
   }
 
   deleteProduto() {
     this.produtoService.deleteCar(16)
-      .then(res => console.log("apagaded", res))
+      .then(res => console.log("Apagado", res))
       .catch(error => console.error(error))
   }
 }

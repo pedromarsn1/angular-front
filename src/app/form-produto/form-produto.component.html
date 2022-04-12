@@ -5,22 +5,24 @@
     margin-right: 20px;
   }
 </style>
+<div>
+  <h1>
+    Cadastro de Produtos
+  </h1>
+</div>
 
-    <form id="add-form" class="border border-4 p-3">
-      <h1>
-        Cadastro de Produtos
-      </h1>
+    <form method="post" #frm="ngForm" (ngSubmit)="saveProduto()" id="add-form" class="border border-4 p-3">
     <div class="form-row">
       <div class="row g-2">
         <div class="row">
           <div class="col-md-2 p-3">
             <label >Cód. Produto</label>
-            <input type="number"class="form-control" placeholder="Digite o código do produto">
+            <input type="number"class="form-control" placeholder="Digite o código do produto" [(ngModel)]="produto.codProduto" required>
           </div>
           <div class="col-md-5 p-3">
             <div class="">
             <label >Nome</label>
-            <input type="text" class="form-control" placeholder="Digite o nome do produto" >
+            <input type="text" class="form-control" placeholder="Digite o nome do produto" [(ngModel)]="produto.nome" required>
             </div>
         </div>
       </div>

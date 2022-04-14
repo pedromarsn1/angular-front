@@ -17,6 +17,8 @@ import { ProdutoComponent } from './produtos/produto/produto.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ProdutoService} from "./shared/service/produto.service";
 import { FormsModule } from '@angular/forms';
+import { UnidadeComponent } from './unidade/unidade.component';
+import { GrupoComponent } from './grupo/grupo.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     TabelaProdutosComponent,
     EditarProdutoComponent,
     ProdutosComponent,
-    ProdutoComponent
+    ProdutoComponent,
+    UnidadeComponent,
+    GrupoComponent
   ],
   imports: [
     HttpClientModule,

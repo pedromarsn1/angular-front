@@ -16,7 +16,7 @@ import { ProdutosComponent } from './produtos/produtos.component';
 import { ProdutoComponent } from './produtos/produto/produto.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ProdutoService} from "./shared/service/produto.service";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UnidadeComponent } from './unidade/unidade.component';
 import { GrupoComponent } from './grupo/grupo.component';
 
@@ -41,7 +41,8 @@ import { GrupoComponent } from './grupo/grupo.component';
     [MDBBootstrapModule.forRoot()],
     MdbCollapseModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ProdutoService],
   bootstrap: [AppComponent]

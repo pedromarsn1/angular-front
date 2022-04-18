@@ -5,18 +5,18 @@ import { Grupo } from "src/app/grupo/grupo.model";
 @Injectable({
     providedIn: 'root'
   })
-  export class ProdutoService {
+  export class GrupoService {
     apiUrl = 'http://localhost:8080/grupos'
-  
+
     httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }
-  
+
     constructor(private httpClient: HttpClient) {
     }
-  
+
     //Mostra todos os produtos
     getAll() {
       return this.httpClient.get<Grupo[]>(this.apiUrl).toPromise();

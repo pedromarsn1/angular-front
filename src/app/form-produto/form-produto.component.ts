@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {Produto} from "../produtos/produto/produto.model";
 import {ProdutoService} from "../shared/service/produto.service";
 import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
+import { UnidadeService } from '../shared/service/unidade.service';
+import { GrupoService } from '../shared/service/grupo.service';
+import { Unidade } from '../unidade/unidade.model';
+import { Grupo } from '../grupo/grupo.model';
 
 @Component({
   selector: 'app-form-produto',
@@ -13,10 +17,14 @@ export class FormProdutoComponent implements OnInit {
 
   produto : any;
   produtos: Produto[] = []
+  unidades : Unidade[] = []
+  grupos : Grupo[] = []
 
-  constructor( 
+  constructor(
     private fb: FormBuilder,
-    public produtoService : ProdutoService) { }
+    public produtoService : ProdutoService,
+    public unidadeService : UnidadeService,
+    public grupoService : GrupoService) { }
 
   ngOnInit(): void {
     this.produto = {}
@@ -27,7 +35,7 @@ export class FormProdutoComponent implements OnInit {
       grupo: ["", [Validators.required]],
       nome: ["", [Validators.required]],
       unidade: ["", [Validators.required]]
-    
+
     })
 
   }
@@ -35,8 +43,8 @@ export class FormProdutoComponent implements OnInit {
   saveProduto(){
     this.produtoService.saveProduto(this.produto)
     .then(produto => console.log("Adicionado", produto))
-    .catch(error=> console.error(error)) 
-    
+    .catch(error=> console.error(error))
+
     this.formProduto.reset();
   }
 

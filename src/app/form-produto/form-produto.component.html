@@ -38,20 +38,16 @@
             <div class="col-md-2">
               <div class="p-3">
                 <label>Unidade</label>
-                <select class="form-select" formControlName="unidade" name="unidade">
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                <select class="form-select" formControlName="unidade" name="unidade" *ngFor="let unidade of unidades">
+                  <option value="1">{{unidade.nomeUnidade}}</option>
                 </select>
               </div>
             </div>
             <div class="col-md-2">
               <div class="p-3">
                 <label>Grupo</label>
-                <select class="form-select" formControlName="grupo" name="grupo">
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                <select class="form-select" formControlName="grupo" name="grupo" *ngFor="let grupo of grupos">
+                  <option value="{{grupo.idGrupo}}">{{grupo.nomeGrupo}}</option>
                 </select>
               </div>
             </div>

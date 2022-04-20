@@ -19,6 +19,6 @@ import { Unidade } from "src/app/unidade/unidade.model";
 
     //Mostra todos os produtos
     getAll() {
-     return this.httpClient.get<Unidade[]>(this.apiUrl).toPromise();
+     return this.httpClient.get<Unidade[]>(this.apiUrl);
     }
 }

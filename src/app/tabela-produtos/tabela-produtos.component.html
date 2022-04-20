@@ -29,41 +29,15 @@
 
   </thead>
   <tbody>
-  <tr *ngFor="let produto ">
+  <tr *ngFor="let produto of produtos ">
     <td>{{produto.codProduto}}</td>
     <td>{{produto.nome}}</td>
     <td>{{produto.quantidade}}</td>
     <td>{{produto.unidade}}</td>
     <td>
       <button type="button" class="btn btn-warning btn-sm" [routerLink]="['/editar-prod']">Editar</button>
-      <button type="button" class="btn btn-danger btn-sm ml-1" >Deletar</button>
+      <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteProduto()">Deletar</button>
     </td>
   </tr>
   </tbody>
 </table>
-
-<nav aria-label="Page navigation example" class="d-flex justify-content-center">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link text-dark" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Anterior</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-    <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-    <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link text-dark" href="#" aria-label="Next">
-        <span class="sr-only">Próxima</span>
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-
-<button class="btn btn-success btn-sm" (click)="getAllProdutos()">Obter Todos</button>
-<button class="btn btn-success btn-sm" (click)="getByIdProduto()">Obter Um</button>
-<button class="btn btn-success btn-sm" (click)="saveProduto()">Salvar Produto</button>
-<button class="btn btn-success btn-sm" (click)="updateProduto()">Atualizar Produto</button>
-<button class="btn btn-success btn-sm" (click)="deleteProduto()">Deletar Produto</button>

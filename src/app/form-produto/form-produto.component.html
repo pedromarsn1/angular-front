@@ -7,21 +7,22 @@
 </style>
 
 
-    <form method="post" [formGroup]="formProduto" id="add-form" class="border border-4 p-3">
+    <form method="post" [formGroup]="produtoForm" class="border border-4 p-3">
     <div class="form-row">
       <h1>
         Cadastro de Produtos
       </h1>
+
       <div class="row g-2">
         <div class="row">
           <div class="col-md-2 p-3">
-            <label >Cód. Produto</label>
-            <input type="number"class="form-control" placeholder="Digite o código do produto" formControlName="codProduto" name="codProduto" required>
+            <label>Cód. Produto</label>
+            <input type="number"class="form-control" placeholder="Digite o código do produto" formControlName="codProduto" name="codProduto">
           </div>
           <div class="col-md-5 p-3">
             <div class="">
             <label >Nome</label>
-            <input type="text" class="form-control" placeholder="Digite o nome do produto" formControlName="nome" name="nome" required>
+            <input type="text" class="form-control" placeholder="Digite o nome do produto" formControlName="nome" name="nome">
             </div>
         </div>
       </div>
@@ -33,29 +34,31 @@
           <div class="row">
             <div class="col-md-2 p-3">
               <label>Quantidade</label>
-              <input type="number" class="form-control" placeholder="Digite a quantidade do produto" formControlName="quantidade" name="quantidade" required>
+              <input type="number" class="form-control" placeholder="Digite a quantidade do produto" formControlName="quantidade" name="quantidade">
             </div>
             <div class="col-md-2">
               <div class="p-3">
                 <label>Unidade</label>
-                <select class="form-select" formControlName="unidade" name="unidade" *ngFor="let unidade of unidades">
-                  <option value="1">{{unidade.nomeUnidade}}</option>
+                <select class="form-select" formControlName="unidade" name="unidade" >
+                  <option *ngFor="let unidade of unidades" value="{{unidade.nomeUnidade}}">{{unidade.nomeUnidade}}</option>
                 </select>
               </div>
             </div>
             <div class="col-md-2">
               <div class="p-3">
                 <label>Grupo</label>
-                <select class="form-select" formControlName="grupo" name="grupo" *ngFor="let grupo of grupos">
-                  <option value="{{grupo.idGrupo}}">{{grupo.nomeGrupo}}</option>
+                <select class="form-select" formControlName="grupo" name="grupo">
+                  <option *ngFor="let grupo of grupos" value="{{grupo.nomeGrupo}}">{{grupo.nomeGrupo}}</option>
                 </select>
               </div>
             </div>
           </div>
           <div>
-            <button type="button" class="btn btn-primary" [disabled]="formProduto.invalid" (click)="saveProduto()">Inserir</button>
+            <button type="button" class="btn btn-primary" (click)="createProduto()">Inserir</button>
           </div>
         </div>
       </div>
 </form>
+
+
 

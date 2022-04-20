@@ -19,6 +19,6 @@ import { Grupo } from "src/app/grupo/grupo.model";
 
     //Mostra todos os produtos
     getAll() {
-      return this.httpClient.get<Grupo[]>(this.apiUrl).toPromise();
+      return this.httpClient.get<Grupo[]>(this.apiUrl);
     }
 }

@@ -9,8 +9,9 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./tabela-produtos.component.scss'],
   preserveWhitespaces: true
 })
-export class TabelaProdutosComponent implements OnInit {
 
+export class TabelaProdutosComponent implements OnInit {
+searchText: any
 produtos : Produto [] = []
 
   constructor(public produtoService: ProdutoService) {

@@ -7,22 +7,33 @@
 </style>
 
 
-    <form method="post" [formGroup]="produtoForm" class="border border-4 p-3">
+    <form method="post" [formGroup]="produtoForm" class="border border-4 p-3" >
     <div class="form-row">
       <h1>
         Cadastro de Produtos
       </h1>
 
-      <div class="row g-2">
+      <div class="row g-2" >
         <div class="row">
           <div class="col-md-2 p-3">
             <label>Cód. Produto</label>
-            <input type="number"class="form-control" placeholder="Digite o código do produto" formControlName="codProduto" name="codProduto">
+            <input type="search"class="form-control" placeholder="Digite o código do produto" formControlName="codProduto" name="codProduto" ng-model="searchText" name="codProduto">
+            <!--
+            <select class="form-select" formControlName="unidade" name="unidade" >
+              <option *ngFor="let produto of produtos | filter:searchText"  value="{{produto.codProduto}">{{produto.codProduto}}</option>
+            </select>
+            -->
+
           </div>
           <div class="col-md-5 p-3">
             <div class="">
             <label >Nome</label>
-            <input type="text" class="form-control" placeholder="Digite o nome do produto" formControlName="nome" name="nome">
+            <input type="text" class="form-control" placeholder="Digite o nome do produto" formControlName="nome" name="nome" >
+            <!--
+            <select class="form-select" formControlName="unidade" name="unidade" >
+              <option *ngFor="let produto of produtos | filter:searchText"  value="{{produto.nome}}">{{produto.nome}}</option>
+            </select>
+            -->
             </div>
         </div>
       </div>

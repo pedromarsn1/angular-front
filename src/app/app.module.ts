@@ -19,7 +19,7 @@ import {ProdutoService} from "./shared/service/produto.service";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UnidadeComponent } from './unidade/unidade.component';
 import { GrupoComponent } from './grupo/grupo.component';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import { GrupoComponent } from './grupo/grupo.component';
     MdbCollapseModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [ProdutoService],
   bootstrap: [AppComponent]

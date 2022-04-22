@@ -15,24 +15,10 @@ import { Router } from '@angular/router';
 })
 export class FormProdutoComponent implements OnInit {
  public produtoForm!: FormGroup;
-
+  searchText : any
   produtos: Produto []= []
-  unidades : Unidade[] = [{
-    idUnidade: 1,
-    nomeUnidade: "UN"
-  },
-  {
-  idUnidade : 5,
-  nomeUnidade : "PC"
-  }]
-
-  grupos : Grupo[] = [{
-    idGrupo : 5,
-    nomeGrupo : "Nestlé"
-  },{
-    idGrupo : 6,
-    nomeGrupo : "Piracanjuba"
-  }]
+  unidades : Unidade[] = []
+  grupos : Grupo[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -52,6 +38,7 @@ export class FormProdutoComponent implements OnInit {
 
     })
 
+   this.produtoService.getAll().subscribe(dados => this.produtos = dados)
     this.unidadeService.getAll().subscribe(dados => this.unidades = dados)
     this.grupoService.getAll().subscribe(dados =>this.grupos = dados)
 

@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col-md-2 p-3">
             <label>Cód. Produto</label>
-            <input type="search"class="form-control" placeholder="Digite o código do produto" formControlName="codProduto" name="codProduto" ng-model="searchText" name="codProduto">
+            <input type="search"class="form-control" placeholder="Digite o código do produto" formControlName="codProduto" name="codProduto" (change)="filterProductByCode($event)" ng-model="searchText" name="codProduto" >
             <!--
             <select class="form-select" formControlName="unidade" name="unidade" >
               <option *ngFor="let produto of produtos | filter:searchText"  value="{{produto.codProduto}">{{produto.codProduto}}</option>
@@ -28,7 +28,7 @@
           <div class="col-md-5 p-3">
             <div class="">
             <label >Nome</label>
-            <input type="text" class="form-control" placeholder="Digite o nome do produto" formControlName="nome" name="nome" >
+            <input type="text" class="form-control" placeholder="Digite o nome do produto" formControlName="nome" name="nome" readonly>
             <!--
             <select class="form-select" formControlName="unidade" name="unidade" >
               <option *ngFor="let produto of produtos | filter:searchText"  value="{{produto.nome}}">{{produto.nome}}</option>
@@ -50,17 +50,13 @@
             <div class="col-md-2">
               <div class="p-3">
                 <label>Unidade</label>
-                <select class="form-select" formControlName="unidade" name="unidade" >
-                  <option *ngFor="let unidade of unidades" value="{{unidade.nomeUnidade}}">{{unidade.nomeUnidade}}</option>
-                </select>
+                <input class="form-control" formControlName="unidade" name="unidade" (change)="filterProductByCode($event)" readonly>
               </div>
             </div>
             <div class="col-md-2">
               <div class="p-3">
                 <label>Grupo</label>
-                <select class="form-select" formControlName="grupo" name="grupo">
-                  <option *ngFor="let grupo of grupos" value="{{grupo.nomeGrupo}}">{{grupo.nomeGrupo}}</option>
-                </select>
+                <input class="form-control" formControlName="grupo" name="grupo" (change)="filterProductByCode($event)" readonly>
               </div>
             </div>
           </div>

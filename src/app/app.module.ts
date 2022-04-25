@@ -8,18 +8,20 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
-import {RouterModule} from "@angular/router";
-import {ROUTES} from "./app.routes";
+import { RouterModule } from '@angular/router';
+import { ROUTES } from './app.routes';
 import { TabelaProdutosComponent } from './tabela-produtos/tabela-produtos.component';
 import { EditarProdutoComponent } from './editar-produto/editar-produto.component';
 import { ProdutosComponent } from './produtos/produtos.component';
 import { ProdutoComponent } from './produtos/produto/produto.component';
-import {HttpClientModule} from "@angular/common/http";
-import {ProdutoService} from "./shared/service/produto.service";
+import { HttpClientModule } from '@angular/common/http';
+import { ProdutoService } from './shared/service/produto.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UnidadeComponent } from './unidade/unidade.component';
 import { GrupoComponent } from './grupo/grupo.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ProdutosComponent,
     ProdutoComponent,
     UnidadeComponent,
-    GrupoComponent
+    GrupoComponent,
   ],
   imports: [
     HttpClientModule,
@@ -43,9 +45,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     RouterModule.forRoot(ROUTES),
     FormsModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [ProdutoService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

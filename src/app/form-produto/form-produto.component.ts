@@ -50,10 +50,11 @@ export class FormProdutoComponent implements OnInit {
     this.produtoForm.controls['nome'].setValue(produto.nome);
     this.produtoForm.controls['unidade'].setValue(produto.unidade);
     this.produtoForm.controls['grupo'].setValue(produto.grupo);
-    this.produtoForm.controls['quantidade'].setValue(produto.quantidade);
+    //this.produtoForm.controls['quantidade'].setValue(produto.quantidade);
     console.log(produto);
   }
 
+  //precisa ser um update
   createProduto() {
     this.produtoService.saveProduto(this.produtoForm.value).subscribe(() => {
       (result: any) => result;
@@ -62,4 +63,5 @@ export class FormProdutoComponent implements OnInit {
 
     this.produtoForm.reset();
   }
+
 }

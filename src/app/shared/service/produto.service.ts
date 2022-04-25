@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
+import {Injectable,Renderer2,RendererFactory2} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, take} from "rxjs";
 import {Produto} from "../../produtos/produto/produto.model";
 
 @Injectable({
@@ -8,6 +8,7 @@ import {Produto} from "../../produtos/produto/produto.model";
 })
 export class ProdutoService {
   apiUrl = 'http://localhost:8080/produtos'
+  private renderer!: Renderer2;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -16,6 +17,7 @@ export class ProdutoService {
   }
 
   constructor(private httpClient: HttpClient) {
+
   }
 
   //Mostra todos os produtos
@@ -46,15 +48,16 @@ export class ProdutoService {
   }
 
   updateProduto(produto : Produto) {
-    return this.httpClient.put<Produto>(this.apiUrl + "/" + produto._id, produto).subscribe(
-      resultado => {
-        console.log('Produto alterado com sucesso.')
-      })
+    return this.httpClient.put<Produto>(this.apiUrl + "/" + produto._id, produto)
+    //.subscribe(
+     // resultado => {
+      //  console.log('Produto alterado com sucesso.')
+    //  })
 
   }
 
-  deleteCar(id : any) {
-    return this.httpClient.delete<Produto>(this.apiUrl + '/' + id).toPromise();
+  deleteProduto(id : any) {
+    return this.httpClient.delete(this.apiUrl + '/' + id).pipe(take(1));
   }
 
 

@@ -1,42 +1,68 @@
 <style>
-  table{
+  table {
     margin-top: 20px;
     margin-right: 40px;
     margin-left: 40px;
   }
 
-  nav{
+  nav {
     margin-top: 40px;
   }
 </style>
 
 <div class="p-3" ng-controller="myController">
   <form class="d-flex p-3">
-    <input class="form-control me-2" type="search" placeholder="Procurar por código do cliente..." aria-label="Buscar" [(ngModel)]="searchText" name="searchText">
+    <input
+      class="form-control me-2"
+      type="search"
+      placeholder="Procurar por código do cliente..."
+      aria-label="Buscar"
+      [(ngModel)]="searchText"
+      name="searchText"
+    />
     <button class="btn btn-outline-dark" type="submit">Buscar</button>
   </form>
 </div>
 
 <table class="table p-3">
   <thead class="thead-dark">
-  <tr>
-    <th scope="col">Cód.</th>
-    <th scope="col">Nome</th>
-    <th scope="col">Quantidade</th>
-    <th scope="col">Unidade</th>
-  </tr>
-
+    <tr>
+      <th scope="col">Cód.</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Quantidade</th>
+      <th scope="col">Unidade</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let produto of produtos | filter:searchText ">
-    <td>{{produto.codProduto}}</td>
-    <td>{{produto.nome}}</td>
-    <td>{{produto.quantidade}}</td>
-    <td>{{produto.unidade}}</td>
-    <td>
-      <button type="button" class="btn btn-warning btn-sm" [routerLink]="['/editar-prod']">Editar</button>
-      <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteProduto()">Deletar</button>
-    </td>
-  </tr>
+    <tr *ngFor="let produto of produtos | filter: searchText">
+      <td>{{ produto.codProduto }}</td>
+      <td>{{ produto.nome }}</td>
+      <td>{{ produto.quantidade }}</td>
+      <td>{{ produto.unidade }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-warning btn-sm"
+          [routerLink]="['/editar-prod']"
+        >
+          Editar
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm ml-1"
+          (click)="deleteProduto(produto)"
+        >
+          Deletar
+        </button>
+      </td>
+    </tr>
   </tbody>
 </table>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover este produto?</p>
+    <button type="button" class="btn btn-default"(click)="confirmDelete()">Sim</button>
+    <button type="button" class="btn btn-primary"(click)="declineDelete()">Não</button>
+  </div>
+</ng-template>

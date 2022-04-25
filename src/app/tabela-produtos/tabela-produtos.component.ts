@@ -1,37 +1,65 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Produto} from "../produtos/produto/produto.model";
-import {ProdutoService} from "../shared/service/produto.service";
-import {NgForm} from "@angular/forms";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { Produto } from '../produtos/produto/produto.model';
+import { ProdutoService } from '../shared/service/produto.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-tabela-produtos',
   templateUrl: './tabela-produtos.component.html',
   styleUrls: ['./tabela-produtos.component.scss'],
-  preserveWhitespaces: true
+  preserveWhitespaces: true,
 })
-
 export class TabelaProdutosComponent implements OnInit {
-searchText: any
-produtos : Produto [] = []
+  searchText: any;
+  produtos: Produto[] = [];
+  deleteModalRef?: BsModalRef;
+  @ViewChild('deleteModal') deleteModal: any;
+  message?: string;
+  produtoSelecionado: Produto[] = [];
 
-  constructor(public produtoService: ProdutoService) {
-  }
+  constructor(
+    public produtoService: ProdutoService,
+    public modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
-    this.produtoService.getAll().subscribe(dados => this.produtos = dados)
+    this.produtoService
+      .getAll()
+      .subscribe((dados) => (this.produtoSelecionado = dados));
+    this.produtoService.getAll().subscribe((dados) => (this.produtos = dados));
+    this.produtoService.deleteProduto;
   }
 
-
-
-  getByIdProduto() {
-    this.produtoService.getProdutoById(4)
-      .then(produtos => console.log(produtos))
-      .catch(error => console.error(error))
+  deleteProduto(produto: Produto[]) {
+    this.produtoSelecionado = produto;
+    this.deleteModalRef = this.modalService.show(this.deleteModal, {
+      class: 'modal-sm',
+    });
   }
 
-  deleteProduto() {
-    this.produtoService.deleteCar(8)
-      .then(res => console.log("Apagado", res))
-      .catch(error => console.error(error))
+  //ajeitar o delete
+  confirmDelete() {
+    this.produtoService.deleteProduto(this.produtoSelecionado).subscribe(
+      (success) => {
+        alert('Produto deletado com sucesso');
+        this.deleteModalRef?.hide();
+      },
+      (error) => {
+        alert('Não foi possível deletar o produto. Tente mais tarde');
+        this.deleteModalRef?.hide();
+      }
+    );
+
+    this.message = 'Confirmed!';
+  }
+
+  declineDelete(): void {
+    this.message = 'Declined!';
+    this.deleteModalRef?.hide();
   }
 }

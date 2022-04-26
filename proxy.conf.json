@@ -3,6 +3,7 @@
     "target": "http://localhost:8080/produtos",
     "secure": false,
     "logLevel" : "debug",
+    "changeOrigin" : true,
     "pathRewrite" : {
       "^/api" : ""
   }

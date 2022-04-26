@@ -47,16 +47,16 @@ export class FormProdutoComponent implements OnInit {
     let produto = this.produtos.filter(
       (produto) => produto.codProduto == input.target.value
     )[0];
+    this.produtoForm.controls['_id'].setValue(produto._id);
     this.produtoForm.controls['nome'].setValue(produto.nome);
     this.produtoForm.controls['unidade'].setValue(produto.unidade);
     this.produtoForm.controls['grupo'].setValue(produto.grupo);
-    //this.produtoForm.controls['quantidade'].setValue(produto.quantidade);
     console.log(produto);
   }
 
   //precisa ser um update
-  createProduto() {
-    this.produtoService.saveProduto(this.produtoForm.value).subscribe(() => {
+  updateProduto() {
+    this.produtoService.updateProduto(this.produtoForm.value).subscribe(() => {
       (result: any) => result;
       this.router.navigate(['/table-prod']);
     });

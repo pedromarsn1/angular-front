@@ -1,71 +1,100 @@
 <style>
-  form{
-  margin-top: 40px;
+  form {
+    margin-top: 40px;
     margin-left: 20px;
     margin-right: 20px;
   }
 </style>
 
+<form method="post" [formGroup]="produtoForm" class="border border-4 p-3">
+  <div class="form-row">
+    <h1>Cadastro de Produtos</h1>
 
-    <form method="post" [formGroup]="produtoForm" class="border border-4 p-3" >
-    <div class="form-row">
-      <h1>
-        Cadastro de Produtos
-      </h1>
-
-      <div class="row g-2" >
-        <div class="row">
-          <div class="col-md-2 p-3">
-            <label>Cód. Produto</label>
-            <input type="search"class="form-control" placeholder="Digite o código do produto" formControlName="codProduto" name="codProduto" (change)="filterProductByCode($event)" ng-model="searchText" name="codProduto" >
-            <!--
-            <select class="form-select" formControlName="unidade" name="unidade" >
-              <option *ngFor="let produto of produtos | filter:searchText"  value="{{produto.codProduto}">{{produto.codProduto}}</option>
-            </select>
-            -->
-
-          </div>
-          <div class="col-md-5 p-3">
-            <div class="">
-            <label >Nome</label>
-            <input type="text" class="form-control" placeholder="Digite o nome do produto" formControlName="nome" name="nome" readonly>
-            <!--
-            <select class="form-select" formControlName="unidade" name="unidade" >
-              <option *ngFor="let produto of produtos | filter:searchText"  value="{{produto.nome}}">{{produto.nome}}</option>
-            </select>
-            -->
-            </div>
+    <div class="row g-2">
+      <div class="row">
+        <div class="col-md-2 p-3">
+          <label>Cód. Produto</label>
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Digite o código do produto"
+            formControlName="codProduto"
+            name="codProduto"
+            (change)="filterProductByCode($event)"
+            ng-model="searchText"
+            name="codProduto"
+          />
         </div>
-      </div>
-
+        <div class="col-md-2 p-3">
+         <!--<label>Id</label>-->
+          <input
+            type="hidden"
+            class="form-control"
+            placeholder="Id do produto"
+            formControlName="_id"
+            name="id"
+            readonly
+          />
+        </div>
+        <div class="col-md-5 p-3">
+          <div class="">
+            <label>Nome</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nome do produto"
+              formControlName="nome"
+              name="nome"
+              readonly
+            />
+          </div>
+        </div>
       </div>
     </div>
-      <div class="form-row">
-        <div class="row g-3">
-          <div class="row">
-            <div class="col-md-2 p-3">
-              <label>Quantidade</label>
-              <input type="number" class="form-control" placeholder="Digite a quantidade do produto" formControlName="quantidade" name="quantidade">
-            </div>
-            <div class="col-md-2">
-              <div class="p-3">
-                <label>Unidade</label>
-                <input class="form-control" formControlName="unidade" name="unidade" (change)="filterProductByCode($event)" readonly>
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="p-3">
-                <label>Grupo</label>
-                <input class="form-control" formControlName="grupo" name="grupo" (change)="filterProductByCode($event)" readonly>
-              </div>
-            </div>
+  </div>
+  <div class="form-row">
+    <div class="row g-3">
+      <div class="row">
+        <div class="col-md-2 p-3">
+          <label>Quantidade</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Quantidade do produto"
+            formControlName="quantidade"
+            name="quantidade"
+          />
+        </div>
+        <div class="col-md-2">
+          <div class="p-3">
+            <label>Unidade</label>
+            <input
+              class="form-control"
+              formControlName="unidade"
+              name="unidade"
+              (change)="filterProductByCode($event)"
+              readonly
+            />
           </div>
-          <div>
-            <button type="button" class="btn btn-primary" (click)="createProduto()">Inserir</button>
+        </div>
+        <div class="col-md-2">
+          <div class="p-3">
+            <label>Grupo</label>
+            <input
+              class="form-control"
+              formControlName="grupo"
+              name="grupo"
+              (change)="filterProductByCode($event)"
+              readonly
+            />
           </div>
         </div>
       </div>
+      <div>
+        <button type="button" class="btn btn-primary" (click)="updateProduto()">
+          Inserir
+        </button>
+      </div>
+    </div>
+  </div>
 </form>
-
-
-

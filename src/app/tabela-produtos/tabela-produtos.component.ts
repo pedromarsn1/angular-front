@@ -1,11 +1,15 @@
 import {
   Component,
+  Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { Produto } from '../produtos/produto/produto.model';
 import { ProdutoService } from '../shared/service/produto.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProdutosComponent } from '../produtos/produtos.component';
 
 
 @Component({
@@ -20,11 +24,13 @@ export class TabelaProdutosComponent implements OnInit {
   deleteModalRef?: BsModalRef;
   @ViewChild('deleteModal') deleteModal: any;
   message?: string;
-  produtoSelecionado: Produto[] = [];
+  @Input() produtoSelecionado: Produto[] = [];
 
   constructor(
-    public produtoService: ProdutoService,
-    public modalService: BsModalService
+    private produtoService: ProdutoService,
+    private modalService: BsModalService,
+    private router: Router,
+    private activeRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -56,10 +62,13 @@ export class TabelaProdutosComponent implements OnInit {
     );
 
     this.message = 'Confirmed!';
+
+
   }
 
   declineDelete(): void {
     this.message = 'Declined!';
     this.deleteModalRef?.hide();
   }
+
 }

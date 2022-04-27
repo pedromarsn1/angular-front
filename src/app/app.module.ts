@@ -23,6 +23,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 
+
 @NgModule({
   declarations: [
     AppComponent,

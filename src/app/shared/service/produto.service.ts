@@ -59,7 +59,7 @@ export class ProdutoService {
     };
 
     return this.httpClient.put<Produto>(
-      this.apiUrl + '/' + produto._id,
+      this.apiUrl + '/' + produto.id,
       produto, this.httpOptions
     );
   }

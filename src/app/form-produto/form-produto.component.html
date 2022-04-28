@@ -1,8 +1,10 @@
 <style>
   form {
-    margin-top: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 40px;
+  }
+
+  .card {
+    margin: 40px;
   }
 </style>
 
@@ -26,7 +28,7 @@
           />
         </div>
         <div class="col-md-2 p-3">
-         <label>Id</label>
+          <label>Id</label>
           <input
             type="number"
             class="form-control"
@@ -98,3 +100,81 @@
     </div>
   </div>
 </form>
+
+<div class="card">
+  <div class="card-body">
+    <form
+      method="post"
+      [formGroup]="produtoTableForm"
+      class="border border-4 p-3"
+    >
+      <table class="table p-3">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Cód.</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Unidade</th>
+            <th scope="col">Qtd. Total</th>
+            <th scope="col">Reservado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produto of produtos">
+            <td>
+              <input
+                type="hidden"
+                name="codProduto"
+                id="codProduto"
+                formControlName="codProduto"
+              />
+              {{ produto.codProduto }}
+            </td>
+            <td>
+              <input
+                type="hidden"
+                name="nome"
+                id="nome"
+                formControlName="nome"
+              />
+              {{ produto.nome }}
+            </td>
+            <td>
+              <input
+                type="hidden"
+                name="unidade"
+                id="unidade"
+                formControlName="unidade"
+              />
+              {{ produto.unidade }}
+            </td>
+            <td>
+              <input
+                type="hidden"
+                name="quantidade"
+                id="quantidade"
+                formControlName="quantidade"
+              />
+              {{ produto.quantidade }}
+            </td>
+            <td>
+              {{ produto }}
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger btn-sm ml-1">
+                Deletar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <br />
+        <button
+          type="button"
+          class="btn btn-success btn-sm ml-1"
+          (click)="gravarProdutos()"
+        >
+          Gravar
+        </button>
+      </table>
+    </form>
+  </div>
+</div>

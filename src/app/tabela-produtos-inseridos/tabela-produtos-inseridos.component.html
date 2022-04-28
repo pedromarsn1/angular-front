@@ -1,0 +1,53 @@
+<style>
+  .card{
+    margin: 40px;
+  }
+</style>
+
+<div class="p-3" ng-controller="myController">
+  <form class="d-flex p-3">
+    <input
+      class="form-control me-2"
+      type="search"
+      placeholder="Procurar por código do cliente..."
+      aria-label="Buscar"
+      [(ngModel)]="searchText"
+      name="searchText"
+    />
+
+  </form>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <table class="table p-3"  method="post" [formGroup]="produtosInseridosForm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Cód.</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Quantidade</th>
+          <th scope="col">Unidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos | filter: searchText">
+          <td>{{ produto.codProduto }}</td>
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.quantidade }}</td>
+          <td>{{ produto.unidade }}</td>
+          <td><input type="hidden" name="id" formControlName="id"/></td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-danger btn-sm ml-1"
+            >
+              Deletar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- (click)="deleteProduto()"-->

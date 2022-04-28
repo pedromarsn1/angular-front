@@ -1,13 +1,13 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
-import { Produto } from '../../produtos/produto/produto.model';
+import { ProdutosInseridos } from '../../produtos/produto/produtos-inseridos.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProdutoService {
-  apiUrl = 'http://localhost:8080/produtos';
+export class ProdutosInseridosService {
+  apiUrl = 'http://localhost:8080/produtos-inseridos';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -19,14 +19,14 @@ export class ProdutoService {
 
   //Mostra todos os produtos
   getAll() {
-    return this.httpClient.get<Produto[]>(this.apiUrl);
+    return this.httpClient.get<ProdutosInseridos[]>(this.apiUrl);
   }
 
   getProdutoById(id: number) {
-    return this.httpClient.get<Produto>(this.apiUrl + '/' + id).toPromise();
+    return this.httpClient.get<ProdutosInseridos>(this.apiUrl + '/' + id).toPromise();
   }
 
-  saveProduto(produto: Produto): Observable<Produto> {
+  saveProduto(produto: ProdutosInseridos): Observable<ProdutosInseridos> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -39,14 +39,14 @@ export class ProdutoService {
       }),
     };
 
-    return this.httpClient.post<Produto>(
+    return this.httpClient.post<ProdutosInseridos>(
       this.apiUrl,
       produto,
       this.httpOptions
     );
   }
 
-  updateProduto(produto: Produto): Observable<Produto> {
+  updateProduto(produto: ProdutosInseridos): Observable<ProdutosInseridos> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export class ProdutoService {
       }),
     };
 
-    return this.httpClient.put<Produto>(
+    return this.httpClient.put<ProdutosInseridos>(
       this.apiUrl + '/' + produto.id,
       produto, this.httpOptions
     );
@@ -66,4 +66,5 @@ export class ProdutoService {
   deleteProduto(id: any) {
     return this.httpClient.delete(this.apiUrl + '/' + id).pipe(take(1));
   }
+
 }

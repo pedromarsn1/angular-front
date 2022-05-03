@@ -23,6 +23,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { TabelaProdutosInseridosComponent } from './tabela-produtos-inseridos/tabela-produtos-inseridos.component';
+import { QuantidadeComponent } from './quantidade/quantidade.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { TabelaProdutosInseridosComponent } from './tabela-produtos-inseridos/ta
     UnidadeComponent,
     GrupoComponent,
     TabelaProdutosInseridosComponent,
+    QuantidadeComponent,
   ],
   imports: [
     HttpClientModule,

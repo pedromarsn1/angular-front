@@ -17,7 +17,7 @@
         <div class="col-md-2 p-3">
           <label>Cód. Produto</label>
           <input
-            type="search"
+            type="number"
             class="form-control"
             placeholder="Digite o código do produto"
             formControlName="codProduto"
@@ -25,17 +25,6 @@
             (change)="filterProductByCode($event)"
             ng-model="searchText"
             name="codProduto"
-          />
-        </div>
-        <div class="col-md-2 p-3">
-          <label>Id</label>
-          <input
-            type="number"
-            class="form-control"
-            placeholder="Id do produto"
-            formControlName="id"
-            name="id"
-            readonly
           />
         </div>
         <div class="col-md-5 p-3">
@@ -50,6 +39,16 @@
               readonly
             />
           </div>
+          <div class="col-md-1 p-3">
+            <input
+              type="hidden"
+              class="form-control"
+              placeholder="Id do produto"
+              formControlName="id"
+              name="id"
+              readonly
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -58,13 +57,14 @@
     <div class="row g-3">
       <div class="row">
         <div class="col-md-2 p-3">
-          <label>Quantidade</label>
+          <label>Qtd. Estoque</label>
           <input
             type="number"
             class="form-control"
             placeholder="Quantidade do produto"
             formControlName="quantidade"
             name="quantidade"
+            (change)="filterProductByCode($event)"
           />
         </div>
         <div class="col-md-2">
@@ -79,18 +79,6 @@
             />
           </div>
         </div>
-        <div class="col-md-2">
-          <div class="p-3">
-            <label>Grupo</label>
-            <input
-              class="form-control"
-              formControlName="grupo"
-              name="grupo"
-              (change)="filterProductByCode($event)"
-              readonly
-            />
-          </div>
-        </div>
       </div>
       <div>
         <button type="button" class="btn btn-primary" (click)="updateProduto()">
@@ -100,81 +88,3 @@
     </div>
   </div>
 </form>
-
-<div class="card">
-  <div class="card-body">
-    <form
-      method="post"
-      [formGroup]="produtoTableForm"
-      class="border border-4 p-3"
-    >
-      <table class="table p-3">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Cód.</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Unidade</th>
-            <th scope="col">Qtd. Total</th>
-            <th scope="col">Reservado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let produto of produtos">
-            <td>
-              <input
-                type="hidden"
-                name="codProduto"
-                id="codProduto"
-                formControlName="codProduto"
-              />
-              {{ produto.codProduto }}
-            </td>
-            <td>
-              <input
-                type="hidden"
-                name="nome"
-                id="nome"
-                formControlName="nome"
-              />
-              {{ produto.nome }}
-            </td>
-            <td>
-              <input
-                type="hidden"
-                name="unidade"
-                id="unidade"
-                formControlName="unidade"
-              />
-              {{ produto.unidade }}
-            </td>
-            <td>
-              <input
-                type="hidden"
-                name="quantidade"
-                id="quantidade"
-                formControlName="quantidade"
-              />
-              {{ produto.quantidade }}
-            </td>
-            <td>
-              {{ produto }}
-            </td>
-            <td>
-              <button type="button" class="btn btn-danger btn-sm ml-1">
-                Deletar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <br />
-        <button
-          type="button"
-          class="btn btn-success btn-sm ml-1"
-          (click)="gravarProdutos()"
-        >
-          Gravar
-        </button>
-      </table>
-    </form>
-  </div>
-</div>

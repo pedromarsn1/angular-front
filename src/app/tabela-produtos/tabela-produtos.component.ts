@@ -4,6 +4,8 @@ import { ProdutoService } from '../shared/service/produto.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { QuantidadeService } from '../shared/service/quantidade.service';
+import { Quantidade } from '../quantidade/quantidade.model';
 
 @Component({
   selector: 'app-tabela-produtos',
@@ -14,6 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class TabelaProdutosComponent implements OnInit {
   searchText: any;
   produtos: Produto[] = [];
+  quantidades: Quantidade[] = [];
   deleteModalRef?: BsModalRef;
   @ViewChild('deleteModal') deleteModal: any;
   message?: string;
@@ -23,6 +26,7 @@ export class TabelaProdutosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private produtoService: ProdutoService,
+    private quantidadeService: QuantidadeService,
     private modalService: BsModalService,
     private router: Router,
     private activeRoute: ActivatedRoute
@@ -38,6 +42,7 @@ export class TabelaProdutosComponent implements OnInit {
       .subscribe((dados) => (this.produtoSelecionado = dados));
     this.produtoService.getAll().subscribe((dados) => (this.produtos = dados));
     this.produtoService.deleteProduto;
+
   }
 
   deleteProduto(produto: Produto[]) {
@@ -49,10 +54,6 @@ export class TabelaProdutosComponent implements OnInit {
 
   //ajeitar o delete
   confirmDelete(input: any) {
-    // let produto = this.produtos.filter(
-    //  (produto) => produto.id === input.target.value
-    // )[0];
-
     this.produtoService.deleteProduto(this.produtoSelecionado).subscribe(
       (success) => {
         alert('Produto deletado com sucesso');

@@ -3,13 +3,11 @@ import { Produto } from '../produtos/produto/produto.model';
 import { ProdutoService } from '../shared/service/produto.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UnidadeService } from '../shared/service/unidade.service';
-import { GrupoService } from '../shared/service/grupo.service';
 import { Unidade } from '../unidade/unidade.model';
-import { Grupo } from '../grupo/grupo.model';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.service';
-import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
+import { QuantidadeService } from '../shared/service/quantidade.service';
+import { Quantidade } from '../quantidade/quantidade.model';
 
 @Component({
   selector: 'app-form-produto',
@@ -18,25 +16,21 @@ import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model'
 })
 export class FormProdutoComponent implements OnInit {
   public produtoForm!: FormGroup;
-  public produtoTableForm!: FormGroup;
   searchText: any;
   produtos: Produto[] = [];
-  produtosInseridos: ProdutosInseridos[] = [];
   unidades: Unidade[] = [];
-  grupos: Grupo[] = [];
+  quantidades: Quantidade[] = [];
   deleteModalRef?: BsModalRef;
   @ViewChild('deleteModal') deleteModal: any;
   message?: string;
   @Input() produtoSelecionado: Produto[] = [];
 
-
   constructor(
     private fb: FormBuilder,
     public produtoService: ProdutoService,
-    public produtosInseridosService: ProdutosInseridosService,
     public unidadeService: UnidadeService,
     private modalService: BsModalService,
-    public grupoService: GrupoService,
+    private quantidadeService: QuantidadeService,
     private router: Router
   ) {}
 
@@ -45,56 +39,40 @@ export class FormProdutoComponent implements OnInit {
       id: ['', [Validators.required]],
       codProduto: ['', [Validators.required]],
       quantidade: ['', [Validators.required]],
-      grupo: ['', [Validators.required]],
       nome: ['', [Validators.required]],
       unidade: ['', [Validators.required]],
     });
 
-    this.produtoTableForm = this.fb.group({
-      id: ['', [Validators.required]],
-      codProduto: ['', [Validators.required]],
-      quantidade: ['', [Validators.required]],
-      grupo: ['', [Validators.required]],
-      nome: ['', [Validators.required]],
-      unidade: ['', [Validators.required]],
-    });
-
-    this.produtosInseridosService
-      .getAll()
-      .subscribe((dados) => (this.produtosInseridos = dados));
     this.produtoService.getAll().subscribe((dados) => (this.produtos = dados));
     this.unidadeService.getAll().subscribe((dados) => (this.unidades = dados));
-    this.grupoService.getAll().subscribe((dados) => (this.grupos = dados));
+    this.quantidadeService
+      .getAll()
+      .subscribe((dados) => (this.quantidades = dados));
   }
 
   filterProductByCode(input: any) {
+
     let produto = this.produtos.filter(
       (produto) => produto.codProduto == input.target.value
+    )[0];
+
+    let quantidade = this.quantidades.filter(
+      (quantidades) => quantidades.codProd == input.target.value
     )[0];
 
     this.produtoForm.controls['id'].setValue(produto.id);
     this.produtoForm.controls['nome'].setValue(produto.nome);
     this.produtoForm.controls['unidade'].setValue(produto.unidade);
-    this.produtoForm.controls['grupo'].setValue(produto.grupo);
+    this.produtoForm.controls['quantidade'].setValue(quantidade.quantidade);
     console.log(produto);
+    console.log(quantidade);
   }
 
   updateProduto() {
-   this.produtoService.updateProduto(this.produtoForm.value).subscribe(() => {
-     (result: any) => result;
-     this.router.navigate(['/form']);
+    this.produtoService.saveProduto(this.produtoForm.value).subscribe(() => {
+      (result: any) => result;
+      this.router.navigate(['/form']);
     });
-
-    this.produtoForm.reset();
-  }
-
-  gravarProdutos() {
-    this.produtosInseridosService
-      .saveProduto(this.produtoTableForm.value)
-      .subscribe(() => {
-        (result: any) => result;
-        this.router.navigate(['/produtos-inseridos']);
-      });
 
     this.produtoForm.reset();
   }
@@ -108,10 +86,6 @@ export class FormProdutoComponent implements OnInit {
 
   //ajeitar o delete
   confirmDelete(input: any) {
-    // let produto = this.produtos.filter(
-    //  (produto) => produto.id === input.target.value
-    // )[0];
-
     this.produtoService.deleteProduto(this.produtoSelecionado).subscribe(
       (success) => {
         alert('Produto deletado com sucesso');

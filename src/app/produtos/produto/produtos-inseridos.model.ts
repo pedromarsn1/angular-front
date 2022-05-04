@@ -1,8 +1,9 @@
 export interface ProdutosInseridos {
   id? : number
+  idProduto: number
   codProduto: number
-  quantidade: number
-  grupo?: string
+  qtdEstocada: number
+  qtdReservada:number
   nome: string
   unidade?: string
- }
+ } 

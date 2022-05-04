@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { QuantidadeService } from '../shared/service/quantidade.service';
 import { Quantidade } from '../quantidade/quantidade.model';
+import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.service';
+import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
 
 @Component({
   selector: 'app-form-produto',
@@ -20,6 +22,7 @@ export class FormProdutoComponent implements OnInit {
   produtos: Produto[] = [];
   unidades: Unidade[] = [];
   quantidades: Quantidade[] = [];
+  produtosInseridos: ProdutosInseridos[] = [];
   deleteModalRef?: BsModalRef;
   @ViewChild('deleteModal') deleteModal: any;
   message?: string;
@@ -31,6 +34,7 @@ export class FormProdutoComponent implements OnInit {
     public unidadeService: UnidadeService,
     private modalService: BsModalService,
     private quantidadeService: QuantidadeService,
+    private produtosInseridosService: ProdutosInseridosService,
     private router: Router
   ) {}
 
@@ -38,11 +42,15 @@ export class FormProdutoComponent implements OnInit {
     this.produtoForm = this.fb.group({
       id: ['', [Validators.required]],
       codProduto: ['', [Validators.required]],
-      quantidade: ['', [Validators.required]],
+      qtdestocada: ['', [Validators.required]],
+      qtdreservada: ['', [Validators.required]],
       nome: ['', [Validators.required]],
       unidade: ['', [Validators.required]],
     });
 
+    this.produtosInseridosService
+      .getAll()
+      .subscribe((dados) => (this.produtosInseridos = dados));
     this.produtoService.getAll().subscribe((dados) => (this.produtos = dados));
     this.unidadeService.getAll().subscribe((dados) => (this.unidades = dados));
     this.quantidadeService
@@ -51,7 +59,6 @@ export class FormProdutoComponent implements OnInit {
   }
 
   filterProductByCode(input: any) {
-
     let produto = this.produtos.filter(
       (produto) => produto.codProduto == input.target.value
     )[0];
@@ -63,16 +70,18 @@ export class FormProdutoComponent implements OnInit {
     this.produtoForm.controls['id'].setValue(produto.id);
     this.produtoForm.controls['nome'].setValue(produto.nome);
     this.produtoForm.controls['unidade'].setValue(produto.unidade);
-    this.produtoForm.controls['quantidade'].setValue(quantidade.quantidade);
+    this.produtoForm.controls['qtdestocada'].setValue(quantidade.quantidade);
     console.log(produto);
     console.log(quantidade);
   }
 
   updateProduto() {
-    this.produtoService.saveProduto(this.produtoForm.value).subscribe(() => {
-      (result: any) => result;
-      this.router.navigate(['/form']);
-    });
+    this.produtosInseridosService
+      .saveProduto(this.produtoForm.value)
+      .subscribe(() => {
+        (result: any) => result;
+        this.router.navigate(['/form']);
+      });
 
     this.produtoForm.reset();
   }

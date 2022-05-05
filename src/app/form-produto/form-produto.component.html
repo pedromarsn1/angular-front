@@ -40,17 +40,6 @@
               readonly
             />
           </div>
-          <div class="col-md-1 p-3">
-            <input
-              type="hidden"
-              class="form-control"
-              placeholder="Id do produto"
-              formControlName="id"
-              (change)="filterProductByCode($event)"
-              name="id"
-              readonly
-            />
-          </div>
         </div>
       </div>
     </div>
@@ -64,8 +53,7 @@
             type="number"
             class="form-control"
             placeholder="Quantidade do produto"
-            formControlName="qtdestocada"
-            (change)="filterProductByCode($event)"
+            formControlName="qtdEstocada"
             name="qtdestocada"
           />
         </div>
@@ -75,7 +63,8 @@
             type="number"
             class="form-control"
             placeholder="Qtd. reservada"
-            formControlName="qtdreservada"
+            formControlName="qtdReservada"
+            (change)="filterProductByCode($event)"
             name="qtdreservada"
             readonly
           />
@@ -95,7 +84,7 @@
         </div>
       </div>
       <div>
-        <button type="button" class="btn btn-primary" (click)="updateProduto()">
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">
           Inserir
         </button>
       </div>
@@ -109,25 +98,4 @@
   </div>
 </div>
 
-<!--
-      <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Cod.</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Qtd. Reservada</th>
-          <th scope="col">Qtd. Estoque</th>
-          <th scope="col">Unidade</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-      </tbody>
-    </table>
--->
+<!---->

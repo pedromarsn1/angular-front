@@ -1,4 +1,4 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
 import { ProdutosInseridos } from '../../produtos/produto/produtos-inseridos.model';
@@ -23,7 +23,9 @@ export class ProdutosInseridosService {
   }
 
   getProdutoById(id: number) {
-    return this.httpClient.get<ProdutosInseridos>(this.apiUrl + '/' + id).toPromise();
+    return this.httpClient
+      .get<ProdutosInseridos[]>(this.apiUrl + '/' + id)
+      .toPromise();
   }
 
   saveProduto(produto: ProdutosInseridos): Observable<ProdutosInseridos> {
@@ -33,9 +35,8 @@ export class ProdutosInseridosService {
         'Access-Control-Allow-Origin': 'http://localhost:8080',
         'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-        key: 'x-api-key',
-        value: 'NNctr6Tjrw9794gFXf3fi6zWBZ78j6Gv3UCb3y0x',
+        'Access-Control-Allow-Methods':
+          'GET,PUT,POST,DELETE,OPTIONS,HEAD,TRACE,CONNECT',
       }),
     };
 
@@ -53,18 +54,19 @@ export class ProdutosInseridosService {
         'Access-Control-Allow-Origin': 'http://localhost:8080',
         'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS,HEAD,TRACE,CONNECT'
+        'Access-Control-Allow-Methods':
+          'GET,PUT,POST,DELETE,OPTIONS,HEAD,TRACE,CONNECT',
       }),
     };
 
     return this.httpClient.put<ProdutosInseridos>(
       this.apiUrl + '/' + produto.id,
-      produto, this.httpOptions
+      produto,
+      this.httpOptions
     );
   }
 
   deleteProduto(id: any) {
     return this.httpClient.delete(this.apiUrl + '/' + id).pipe(take(1));
   }
-
 }

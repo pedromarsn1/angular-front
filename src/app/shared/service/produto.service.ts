@@ -1,4 +1,4 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
 import { Produto } from '../../produtos/produto/produto.model';
@@ -33,9 +33,7 @@ export class ProdutoService {
         'Access-Control-Allow-Origin': 'http://localhost:8080',
         'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-        key: 'x-api-key',
-        value: 'NNctr6Tjrw9794gFXf3fi6zWBZ78j6Gv3UCb3y0x',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS,HEAD,TRACE,CONNECT',
       }),
     };
 
@@ -53,13 +51,15 @@ export class ProdutoService {
         'Access-Control-Allow-Origin': 'http://localhost:8080',
         'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS,HEAD,TRACE,CONNECT'
+        'Access-Control-Allow-Methods':
+          'GET,PUT,POST,DELETE,OPTIONS,HEAD,TRACE,CONNECT',
       }),
     };
 
     return this.httpClient.put<Produto>(
       this.apiUrl + '/' + produto.id,
-      produto, this.httpOptions
+      produto,
+      this.httpOptions
     );
   }
 

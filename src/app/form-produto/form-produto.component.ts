@@ -42,8 +42,8 @@ export class FormProdutoComponent implements OnInit {
     this.produtoForm = this.fb.group({
       id: ['', [Validators.required]],
       codProduto: ['', [Validators.required]],
-      qtdestocada: ['', [Validators.required]],
-      qtdreservada: ['', [Validators.required]],
+      qtdEstocada: ['', [Validators.required]],
+      qtdReservada: ['', [Validators.required]],
       nome: ['', [Validators.required]],
       unidade: ['', [Validators.required]],
     });
@@ -67,21 +67,45 @@ export class FormProdutoComponent implements OnInit {
       (quantidades) => quantidades.codProd == input.target.value
     )[0];
 
-    this.produtoForm.controls['id'].setValue(produto.id);
     this.produtoForm.controls['nome'].setValue(produto.nome);
     this.produtoForm.controls['unidade'].setValue(produto.unidade);
-    this.produtoForm.controls['qtdestocada'].setValue(quantidade.quantidade);
+    this.produtoForm.controls['qtdReservada'].setValue(quantidade.quantidade);
     console.log(produto);
     console.log(quantidade);
   }
 
-  updateProduto() {
+  //inserirProduto() {
+  //  this.produtosInseridosService
+  //    .saveProduto(this.produtoForm.value)
+  //    .subscribe(() => {
+  //      (result: any) => result;
+  // this.router.navigate(['/produtos-inseridos']);
+  //    });
+  //this.produtoForm.reset();
+  //}
+
+  insertProduto(produto: ProdutosInseridos) {
+    this.produtoForm = this.fb.group({
+      id: [produto.id],
+      nome: [produto.nome],
+      codProduto: [produto.codProduto],
+      qtdEstocada: [produto.qtdEstocada],
+      qtdReservada: [produto.qtdReservada],
+      unidade: [produto.unidade],
+    });
+  }
+
+  onSubmit() {
     this.produtosInseridosService
       .saveProduto(this.produtoForm.value)
       .subscribe(() => {
         (result: any) => result;
-        this.router.navigate(['/form']);
       });
+
+  //para descobrir o problema
+    console.log(this.produtosInseridosService.saveProduto(this.produtoForm.value).subscribe(() => {
+      (result: any) => result;
+    }));
 
     this.produtoForm.reset();
   }

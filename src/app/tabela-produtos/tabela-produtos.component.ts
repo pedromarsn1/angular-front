@@ -21,28 +21,21 @@ export class TabelaProdutosComponent implements OnInit {
   @ViewChild('deleteModal') deleteModal: any;
   message?: string;
   @Input() produtoSelecionado: Produto[] = [];
-  public produtoForm!: FormGroup;
+
 
   constructor(
-    private fb: FormBuilder,
     private produtoService: ProdutoService,
     private quantidadeService: QuantidadeService,
     private modalService: BsModalService,
-    private router: Router,
-    private activeRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.produtoForm = this.fb.group({
-      id: ['', [Validators.required]],
-    });
-
     this.produtoService
       .getAll()
       .subscribe((dados) => (this.produtoSelecionado = dados));
     this.produtoService.getAll().subscribe((dados) => (this.produtos = dados));
+    this.quantidadeService.getAll().subscribe((dados) => (this.quantidades = dados))
     this.produtoService.deleteProduto;
-
   }
 
   deleteProduto(produto: Produto[]) {

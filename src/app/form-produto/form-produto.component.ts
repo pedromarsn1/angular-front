@@ -10,6 +10,7 @@ import { QuantidadeService } from '../shared/service/quantidade.service';
 import { Quantidade } from '../quantidade/quantidade.model';
 import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.service';
 import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
+import * as uuid from 'uuid-generator-ts';
 
 @Component({
   selector: 'app-form-produto',
@@ -67,11 +68,11 @@ export class FormProdutoComponent implements OnInit {
       (quantidades) => quantidades.codProd == input.target.value
     )[0];
 
+    this.produtoForm.controls['id'].setValue(produto.id);
     this.produtoForm.controls['nome'].setValue(produto.nome);
     this.produtoForm.controls['unidade'].setValue(produto.unidade);
     this.produtoForm.controls['qtdReservada'].setValue(quantidade.quantidade);
-    console.log(produto);
-    console.log(quantidade);
+    console.log(quantidade, produto);
   }
 
   //inserirProduto() {
@@ -102,39 +103,52 @@ export class FormProdutoComponent implements OnInit {
         (result: any) => result;
       });
 
-  //para descobrir o problema
-    console.log(this.produtosInseridosService.saveProduto(this.produtoForm.value).subscribe(() => {
-      (result: any) => result;
-    }));
+    //para descobrir o problema
+    console.log(
+      this.produtosInseridosService
+        .saveProduto(this.produtoForm.value)
+        .subscribe(() => {
+          (result: any) => result;
+        })
+    );
 
+    this.router.navigate(['/form']);
     this.produtoForm.reset();
   }
 
-  deleteProduto(produto: Produto[]) {
-    this.produtoSelecionado = produto;
-    this.deleteModalRef = this.modalService.show(this.deleteModal, {
-      class: 'modal-sm',
+  gravar() {
+    this.produtoService.saveProduto(this.produtoForm.value).subscribe(() => {
+      (result: any) => result;
     });
+
+    this.router.navigate([''])
   }
 
-  //ajeitar o delete
-  confirmDelete(input: any) {
-    this.produtoService.deleteProduto(this.produtoSelecionado).subscribe(
-      (success) => {
-        alert('Produto deletado com sucesso');
-        this.deleteModalRef?.hide();
-      },
-      (error) => {
-        alert('Não foi possível deletar o produto. Tente mais tarde');
-        this.deleteModalRef?.hide();
-      }
-    );
-
-    this.message = 'Confirmed!';
-  }
-
-  declineDelete(): void {
-    this.message = 'Declined!';
-    this.deleteModalRef?.hide();
-  }
+  //  deleteProduto(produto: Produto[]) {
+  //    this.produtoSelecionado = produto;
+  //    this.deleteModalRef = this.modalService.show(this.deleteModal, {
+  //      class: 'modal-sm',
+  //    });
+  //  }
+  //
+  //  //ajeitar o delete
+  //  confirmDelete(input: any) {
+  //    this.produtoService.deleteProduto(this.produtoSelecionado).subscribe(
+  //      (success) => {
+  //        alert('Produto deletado com sucesso');
+  //        this.deleteModalRef?.hide();
+  //      },
+  //      (error) => {
+  //        alert('Não foi possível deletar o produto. Tente mais tarde');
+  //        this.deleteModalRef?.hide();
+  //      }
+  //    );
+  //
+  //    this.message = 'Confirmed!';
+  //  }
+  //
+  //  declineDelete(): void {
+  //    this.message = 'Declined!';
+  //    this.deleteModalRef?.hide();
+  //  }
 }

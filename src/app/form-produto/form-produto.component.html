@@ -40,6 +40,19 @@
               readonly
             />
           </div>
+          <div class="col-md-5 p-3">
+            <div class="">
+              <!--<label>Id Produto</label>-->
+              <input
+                type="hidden"
+                class="form-control"
+                formControlName="id"
+                (change)="filterProductByCode($event)"
+                name="id"
+                readonly
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -84,6 +97,7 @@
         </div>
       </div>
       <div>
+        <!--*ngFor="let produtoInserido of produtosInseridos"-->
         <button type="button" class="btn btn-primary" (click)="onSubmit()">
           Inserir
         </button>
@@ -94,7 +108,8 @@
 
 <div class="card">
   <div class="card-body">
-<app-tabela-produtos-inseridos></app-tabela-produtos-inseridos>
+    <app-tabela-produtos-inseridos></app-tabela-produtos-inseridos>
+    <button type="button" class="btn btn-success col-sm-1 p-2">Gravar</button>
   </div>
 </div>
 

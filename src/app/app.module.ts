@@ -24,6 +24,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { TabelaProdutosInseridosComponent } from './tabela-produtos-inseridos/tabela-produtos-inseridos.component';
 import { QuantidadeComponent } from './quantidade/quantidade.component';
+import { GravarProdutosComponent } from './gravar-produtos/gravar-produtos.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { QuantidadeComponent } from './quantidade/quantidade.component';
     GrupoComponent,
     TabelaProdutosInseridosComponent,
     QuantidadeComponent,
+    GravarProdutosComponent,
   ],
   imports: [
     HttpClientModule,

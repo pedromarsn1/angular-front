@@ -11,6 +11,7 @@ import { Quantidade } from '../quantidade/quantidade.model';
 import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.service';
 import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
 import * as uuid from 'uuid-generator-ts';
+import { GravarProdutosService } from '../shared/service/gravar-produtos.service';
 
 @Component({
   selector: 'app-form-produto',
@@ -35,6 +36,7 @@ export class FormProdutoComponent implements OnInit {
     public unidadeService: UnidadeService,
     private modalService: BsModalService,
     private quantidadeService: QuantidadeService,
+    private gravarProdutosService : GravarProdutosService,
     private produtosInseridosService: ProdutosInseridosService,
     private router: Router
   ) {}
@@ -117,38 +119,38 @@ export class FormProdutoComponent implements OnInit {
   }
 
   gravar() {
-    this.produtoService.saveProduto(this.produtoForm.value).subscribe(() => {
+    this.gravarProdutosService.updateProduto(this.produtoForm.value).subscribe(() => {
       (result: any) => result;
     });
 
-    this.router.navigate([''])
+    this.router.navigate(['/table-prod'])
   }
 
-  //  deleteProduto(produto: Produto[]) {
-  //    this.produtoSelecionado = produto;
-  //    this.deleteModalRef = this.modalService.show(this.deleteModal, {
-  //      class: 'modal-sm',
-  //    });
-  //  }
-  //
-  //  //ajeitar o delete
-  //  confirmDelete(input: any) {
-  //    this.produtoService.deleteProduto(this.produtoSelecionado).subscribe(
-  //      (success) => {
-  //        alert('Produto deletado com sucesso');
-  //        this.deleteModalRef?.hide();
-  //      },
-  //      (error) => {
-  //        alert('Não foi possível deletar o produto. Tente mais tarde');
-  //        this.deleteModalRef?.hide();
-  //      }
-  //    );
-  //
-  //    this.message = 'Confirmed!';
-  //  }
-  //
-  //  declineDelete(): void {
-  //    this.message = 'Declined!';
-  //    this.deleteModalRef?.hide();
-  //  }
+ //   deleteProduto(produto: Produto[]) {
+ //     this.produtoSelecionado = produto;
+ //     this.deleteModalRef = this.modalService.show(this.deleteModal, {
+ //       class: 'modal-sm',
+ //     });
+ //   }
+ //
+ //   //ajeitar o delete
+ //   confirmDelete(input: any) {
+ //     this.produtoService.deleteProduto(this.produtoSelecionado).subscribe(
+ //       (success) => {
+ //         alert('Produto deletado com sucesso');
+ //         this.deleteModalRef?.hide();
+ //       },
+ //       (error) => {
+ //         alert('Não foi possível deletar o produto. Tente mais tarde');
+ //         this.deleteModalRef?.hide();
+ //       }
+ //     );
+ //
+ //     this.message = 'Confirmed!';
+ //   }
+ //
+ //   declineDelete(): void {
+ //     this.message = 'Declined!';
+ //     this.deleteModalRef?.hide();
+ //   }
 }

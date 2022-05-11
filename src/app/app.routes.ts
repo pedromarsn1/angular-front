@@ -10,5 +10,5 @@ export const ROUTES: Routes = [
   {path : 'form', component: FormProdutoComponent},
   {path: 'table-prod', component: TabelaProdutosComponent},
   {path: 'editar-prod', component: EditarProdutoComponent},
-  {path: 'produtos-inseridos', component: TabelaProdutosInseridosComponent}
+  {path: 'produtos-inseridos', component: TabelaProdutosInseridosComponent},
 ]

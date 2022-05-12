@@ -1,6 +1,5 @@
 export interface GravarProdutos {
-  id : number
+  id? : number
   idProduto : number
-  qtdReservada: number
   qtdEstocada: number
 }

@@ -107,9 +107,15 @@
 </form>
 
 <div class="card">
-  <div class="card-body">
+  <div class="card-body" [formGroup]="gravarForm">
     <app-tabela-produtos-inseridos></app-tabela-produtos-inseridos>
-    <button type="button" class="btn btn-success col-sm-1 p-2">Gravar</button>
+    <button
+      type="button"
+      class="btn btn-success col-sm-1 p-2"
+    
+    >
+      Gravar
+    </button>
   </div>
 </div>
 

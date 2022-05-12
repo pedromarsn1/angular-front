@@ -25,6 +25,7 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { TabelaProdutosInseridosComponent } from './tabela-produtos-inseridos/tabela-produtos-inseridos.component';
 import { QuantidadeComponent } from './quantidade/quantidade.component';
 import { GravarProdutosComponent } from './gravar-produtos/gravar-produtos.component';
+import { DavItemComponent } from './dav-item/dav-item.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { GravarProdutosComponent } from './gravar-produtos/gravar-produtos.compo
     TabelaProdutosInseridosComponent,
     QuantidadeComponent,
     GravarProdutosComponent,
+    DavItemComponent,
   ],
   imports: [
     HttpClientModule,

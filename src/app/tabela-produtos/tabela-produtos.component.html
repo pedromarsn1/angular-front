@@ -38,7 +38,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let produto of produtos | filter: searchText">
-          <span *ngFor="let gravarProduto of gravarProdutos">
           <td>{{ produto.codProduto }}</td>
           <td>{{ produto.nome }}</td>
           <td>{{ produto.quantidade }}</td>
@@ -52,7 +51,6 @@
               Deletar
             </button>
           </td>
-        </span>
         </tr>
       </tbody>
     </table>

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
 import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.service';
@@ -21,8 +20,6 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private produtosInseridosService: ProdutosInseridosService,
-    private router: Router,
-    private activeRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -30,9 +27,6 @@ export class TabelaProdutosInseridosComponent implements OnInit {
       id: ['', [Validators.required]],
     });
 
-    this.produtosInseridosService
-      .getAll()
-      .subscribe((dados) => (this.produtos = dados));
     this.produtosInseridosService
       .getAll()
       .subscribe((dados) => (this.produtos = dados));

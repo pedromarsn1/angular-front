@@ -10,11 +10,7 @@ import { QuantidadeService } from '../shared/service/quantidade.service';
 import { Quantidade } from '../quantidade/quantidade.model';
 import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.service';
 import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
-import * as uuid from 'uuid-generator-ts';
 import { GravarProdutosService } from '../shared/service/gravar-produtos.service';
-import { DavItemService } from '../shared/service/davitem.service';
-import { DavItem } from '../dav-item/dav-item.model';
-import { GravarProdutos } from '../gravar-produtos/gravar-produtos.model';
 
 @Component({
   selector: 'app-form-produto',
@@ -81,22 +77,23 @@ export class FormProdutoComponent implements OnInit {
     console.log(quantidade, produto);
   }
 
-  insertProduto(produto: ProdutosInseridos) {
-    this.produtoForm = this.fb.group({
-      id: [produto.id],
-      nome: [produto.nome],
-      codProduto: [produto.codProduto],
-      qtdEstocada: [produto.qtdEstocada],
-      qtdReservada: [produto.qtdReservada],
-      unidade: [produto.unidade],
-    });
-  }
+  //insertProduto(produto: ProdutosInseridos) {
+  //  this.produtoForm = this.fb.group({
+  //    id: [produto.id],
+  //    nome: [produto.nome],
+  //    codProduto: [produto.codProduto],
+  //    qtdEstocada: [produto.qtdEstocada],
+  //    qtdReservada: [produto.qtdReservada],
+  //    unidade: [produto.unidade],
+  //  });
+  //}
 
   onSubmit() {
     this.produtosInseridosService
       .saveProduto(this.produtoForm.value)
       .subscribe(() => {
         (result: any) => result;
+        this.router.navigate(['/form']);
       });
 
     //para descobrir o problema
@@ -108,16 +105,11 @@ export class FormProdutoComponent implements OnInit {
         })
     );
 
-    this.router.navigate(['/form']);
+
     this.produtoForm.reset();
   }
 
-  gravar(gravar : GravarProdutos) {
-
-    this.produtoForm = this.fb.group({
-      qtdEstocada: [gravar.qtdEstocada]
-    });
-
+  gravar() {
     this.gravarProdutosService.updateProduto(this.produtoForm.value).subscribe(() => {
       (result: any) => result;
     });

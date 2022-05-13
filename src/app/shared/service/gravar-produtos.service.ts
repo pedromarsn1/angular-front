@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, take } from "rxjs";
 import { GravarProdutos } from "src/app/gravar-produtos/gravar-produtos.model";
 
 @Injectable({
@@ -38,5 +38,9 @@ import { GravarProdutos } from "src/app/gravar-produtos/gravar-produtos.model";
         gravarProdutos,
         this.httpOptions
       );
+    }
+
+    deleteProduto(id: any) {
+      return this.httpClient.delete(this.apiUrl + '/' + id).pipe(take(1));
     }
 }

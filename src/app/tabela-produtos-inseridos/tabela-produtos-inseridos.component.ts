@@ -1,7 +1,14 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
+import { GravarProdutosService } from '../shared/service/gravar-produtos.service';
 import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.service';
 
 @Component({
@@ -17,14 +24,19 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   @Input() produtoSelecionado: ProdutosInseridos[] = [];
   public produtosInseridosForm!: FormGroup;
 
+
   constructor(
     private fb: FormBuilder,
     private produtosInseridosService: ProdutosInseridosService,
+    private gravarProdutoService: GravarProdutosService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.produtosInseridosForm = this.fb.group({
       id: ['', [Validators.required]],
+      codProduto: ['', [Validators.required]],
+      qtdEstocada: ['', [Validators.required]],
     });
 
     this.produtosInseridosService
@@ -33,4 +45,42 @@ export class TabelaProdutosInseridosComponent implements OnInit {
     this.produtosInseridosService.deleteProduto;
   }
 
+  gravar() {
+    this.gravarProdutoService
+      .updateProduto(this.produtosInseridosForm.value)
+      .subscribe(() => {
+        (result: any) => result;
+      });
+
+    console.log(
+      this.gravarProdutoService
+        .updateProduto(this.produtosInseridosForm.value)
+        .subscribe(() => {
+          (result: any) => result;
+        })
+    );
+
+    this.router.navigate(['/form']);
+    this.produtosInseridosForm.reset();
+  }
+
+  //onSubmit() {
+  //  this.produtosInseridosService
+  //    .saveProduto(this.produtoForm.value)
+  //    .subscribe(() => {
+  //      (result: any) => result;
+  //    });
+
+  //  //para descobrir o problema
+  //  console.log(
+  //    this.produtosInseridosService
+  //      .saveProduto(this.produtoForm.value)
+  //      .subscribe(() => {
+  //        (result: any) => result;
+  //      })
+  //  );
+
+  //  this.router.navigate(['/form']);
+  //  this.produtoForm.reset();
+  //}
 }

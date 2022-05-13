@@ -14,61 +14,33 @@ import { GravarProdutosService } from '../shared/service/gravar-produtos.service
   preserveWhitespaces: true,
 })
 export class TabelaProdutosComponent implements OnInit {
-  searchText: any;
-  gravarProdutos: GravarProdutos[] = [];
-  produtos: Produto[] = [];
-  quantidades: Quantidade[] = [];
-  deleteModalRef?: BsModalRef;
-  @ViewChild('deleteModal') deleteModal: any;
-  message?: string;
-  @Input() produtoSelecionado: Produto[] = [];
+ //searchText: any;
+ //gravarProdutos: GravarProdutos[] = [];
+ //produtos: Produto[] = [];
+ //quantidades: Quantidade[] = [];
+ //deleteModalRef?: BsModalRef;
+ //@ViewChild('deleteModal') deleteModal: any;
+ //message?: string;
+ //@Input() produtoSelecionado: Produto[] = [];
 
   constructor(
-    private produtoService: ProdutoService,
-    private quantidadeService: QuantidadeService,
-    private gravarProdutoService: GravarProdutosService,
-    private modalService: BsModalService
+  //  private produtoService: ProdutoService,
+  //  private quantidadeService: QuantidadeService,
+  //  private gravarProdutoService: GravarProdutosService,
+  //  private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
-    this.produtoService
-      .getAll()
-      .subscribe((dados) => (this.produtoSelecionado = dados));
-    this.produtoService.getAll().subscribe((dados) => (this.produtos = dados));
-    this.quantidadeService
-      .getAll()
-      .subscribe((dados) => (this.quantidades = dados));
-    this.gravarProdutoService
-      .getAll()
-      .subscribe((dados) => (this.gravarProdutos = dados));
-    this.produtoService.deleteProduto;
-  }
-
-  deleteProduto(produto: Produto[]) {
-    this.produtoSelecionado = produto;
-    this.deleteModalRef = this.modalService.show(this.deleteModal, {
-      class: 'modal-sm',
-    });
-  }
-
-  //ajeitar o delete
-  confirmDelete(input: any) {
-    this.produtoService.deleteProduto(this.produtoSelecionado).subscribe(
-      (success) => {
-        alert('Produto deletado com sucesso');
-        this.deleteModalRef?.hide();
-      },
-      (error) => {
-        alert('Não foi possível deletar o produto. Tente mais tarde');
-        this.deleteModalRef?.hide();
-      }
-    );
-
-    this.message = 'Confirmed!';
-  }
-
-  declineDelete(): void {
-    this.message = 'Declined!';
-    this.deleteModalRef?.hide();
+   //this.produtoService
+   //  .getAll()
+   //  .subscribe((dados) => (this.produtoSelecionado = dados));
+   //this.produtoService.getAll().subscribe((dados) => (this.produtos = dados));
+   //this.quantidadeService
+   //  .getAll()
+   //  .subscribe((dados) => (this.quantidades = dados));
+   //this.gravarProdutoService
+   //  .getAll()
+   //  .subscribe((dados) => (this.gravarProdutos = dados));
+   //this.produtoService.deleteProduto;
   }
 }

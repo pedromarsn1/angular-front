@@ -21,49 +21,74 @@
 
 -->
 
-<div class="card" >
+<div class="card">
   <div class="card-body">
-    <table class="table p-3" method="post" [formGroup]="produtosInseridosForm">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Cód.</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Unidade</th>
-          <th scope="col">Qtd. Estocada</th>
-          <th scope="col">Qtd. Reservada</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let produto of produtos | filter: searchText">
-          <td>
-            <input
-              type="hidden"
-              name="codProduto"
-              formControlName="codProduto"
-            />{{ produto.codProduto }}
-          </td>
-          <td>{{ produto.nome }}</td>
-          <td>{{ produto.unidade }}</td>
-          <td>
-            <input
-              type="hidden"
-              name="qtdEstocada"
-              formControlName="qtdEstocada"
-            />{{ produto.qtdEstocada }}
-          </td>
-          <td>{{ produto.qtdReservada }}</td>
-          <td><input type="hidden" name="id" formControlName="id" /></td>
-          <td>
-            <button type="button" class="btn btn-danger btn-sm ml-1">
+    <form method="post" (ngSubmit)="gravar()" [formGroup]="myForm">
+      <table class="table p-3" method="post">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Cód.</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Unidade</th>
+            <th scope="col">Qtd. Estocada</th>
+            <th scope="col">Qtd. Reservada</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produto of produtos | filter: searchText">
+            <td>
+              <input
+                type="hidden"
+                name="codProduto"
+                formControlName="codProduto"
+              />{{ produto.codProduto }}
+            </td>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.unidade }}</td>
+            <td>
+              <input
+                type="hidden"
+                name="qtdEstocada"
+                formControlName="qtdEstocada"
+              />{{ produto.qtdEstocada }}
+            </td>
+            <td>{{ produto.qtdReservada }}</td>
+            <td>
+              <input type="hidden" name="id" formControlName="id" />
+            </td>
+            <td>
+              <button
+              type="button"
+              class="btn btn-danger btn-sm ml-1"
+              (click)="deleteProduto(produto)"
+            >
               Deletar
             </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button
+      type="button"
+      class="btn btn-success col-sm-1 p-2"
+      (click)="gravar()"
+    >
+      Gravar
+    </button>
+    </form>
   </div>
-  <button type="button" class="btn btn-success col-sm-1 p-2"
-   (click)="gravar()">Gravar</button>
 </div>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover este produto?</p>
+    <button type="button" class="btn btn-default" (click)="confirmDelete($event)">
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary" (click)="declineDelete()">
+      Não
+    </button>
+  </div>
+</ng-template>
 
 <!-- (click)="deleteProduto()"-->

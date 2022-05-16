@@ -77,17 +77,6 @@ export class FormProdutoComponent implements OnInit {
     console.log(quantidade, produto);
   }
 
-  //insertProduto(produto: ProdutosInseridos) {
-  //  this.produtoForm = this.fb.group({
-  //    id: [produto.id],
-  //    nome: [produto.nome],
-  //    codProduto: [produto.codProduto],
-  //    qtdEstocada: [produto.qtdEstocada],
-  //    qtdReservada: [produto.qtdReservada],
-  //    unidade: [produto.unidade],
-  //  });
-  //}
-
   onSubmit() {
     this.produtosInseridosService
       .saveProduto(this.produtoForm.value)
@@ -105,16 +94,6 @@ export class FormProdutoComponent implements OnInit {
         })
     );
 
-
-    this.produtoForm.reset();
-  }
-
-  gravar() {
-    this.gravarProdutosService.updateProduto(this.produtoForm.value).subscribe(() => {
-      (result: any) => result;
-    });
-
-    this.router.navigate(['/form']);
     this.produtoForm.reset();
   }
 

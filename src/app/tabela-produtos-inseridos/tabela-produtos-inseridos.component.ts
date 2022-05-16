@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
 import { GravarProdutosService } from '../shared/service/gravar-produtos.service';
@@ -22,18 +23,19 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   @ViewChild('deleteModal') deleteModal: any;
   message?: string;
   @Input() produtoSelecionado: ProdutosInseridos[] = [];
-  public produtosInseridosForm!: FormGroup;
-
+  public myForm!: FormGroup;
+  deleteModalRef?: BsModalRef;
 
   constructor(
     private fb: FormBuilder,
     private produtosInseridosService: ProdutosInseridosService,
     private gravarProdutoService: GravarProdutosService,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
-    this.produtosInseridosForm = this.fb.group({
+    this.myForm = this.fb.group({
       id: ['', [Validators.required]],
       codProduto: ['', [Validators.required]],
       qtdEstocada: ['', [Validators.required]],
@@ -46,41 +48,52 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   }
 
   gravar() {
-    this.gravarProdutoService
-      .updateProduto(this.produtosInseridosForm.value)
-      .subscribe(() => {
-        (result: any) => result;
-      });
+    this.gravarProdutoService.updateProduto(this.myForm.value).subscribe(() => {
+      (result: any) => result;
+      (response: any) => {
+        this.produtos = response;
+      };
+    });
 
     console.log(
       this.gravarProdutoService
-        .updateProduto(this.produtosInseridosForm.value)
+        .updateProduto(this.myForm.value)
         .subscribe(() => {
           (result: any) => result;
         })
     );
 
     this.router.navigate(['/form']);
-    this.produtosInseridosForm.reset();
+    this.myForm.reset();
   }
 
-  //onSubmit() {
-  //  this.produtosInseridosService
-  //    .saveProduto(this.produtoForm.value)
-  //    .subscribe(() => {
-  //      (result: any) => result;
-  //    });
+  deleteProduto(produto: ProdutosInseridos[]) {
+    this.produtoSelecionado = produto;
+    this.deleteModalRef = this.modalService.show(this.deleteModal, {
+      class: 'modal-sm',
+    });
+  }
 
-  //  //para descobrir o problema
-  //  console.log(
-  //    this.produtosInseridosService
-  //      .saveProduto(this.produtoForm.value)
-  //      .subscribe(() => {
-  //        (result: any) => result;
-  //      })
-  //  );
+  //ajeitar o delete
+  confirmDelete(input: any) {
+    this.produtosInseridosService
+      .deleteProduto(this.produtoSelecionado)
+      .subscribe(
+        (success) => {
+          alert('Produto deletado com sucesso');
+          this.deleteModalRef?.hide();
+        },
+        (error) => {
+          alert('Não foi possível deletar o produto. Tente mais tarde');
+          this.deleteModalRef?.hide();
+        }
+      );
 
-  //  this.router.navigate(['/form']);
-  //  this.produtoForm.reset();
-  //}
+    this.message = 'Confirmed!';
+  }
+
+  declineDelete(): void {
+    this.message = 'Declined!';
+    this.deleteModalRef?.hide();
+  }
 }

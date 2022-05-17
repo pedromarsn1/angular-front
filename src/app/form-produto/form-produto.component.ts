@@ -73,27 +73,21 @@ export class FormProdutoComponent implements OnInit {
     this.produtoForm.controls['id'].setValue(produto.id);
     this.produtoForm.controls['nome'].setValue(produto.nome);
     this.produtoForm.controls['unidade'].setValue(produto.unidade);
-    this.produtoForm.controls['qtdReservada'].setValue(quantidade.quantidade);
+   this.produtoForm.controls['qtdReservada'].setValue(quantidade.quantidade)
     console.log(quantidade, produto);
   }
 
   onSubmit() {
-    this.produtosInseridosService
+   let submission = this.produtosInseridosService
       .saveProduto(this.produtoForm.value)
       .subscribe(() => {
         (result: any) => result;
-        this.router.navigate(['/form']);
+
       });
 
     //para descobrir o problema
-    console.log(
-      this.produtosInseridosService
-        .saveProduto(this.produtoForm.value)
-        .subscribe(() => {
-          (result: any) => result;
-        })
-    );
-
+    console.log(submission);
+    this.router.navigate(['/form']);
     this.produtoForm.reset();
   }
 

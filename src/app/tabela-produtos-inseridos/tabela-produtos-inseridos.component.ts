@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { identity } from 'rxjs';
 
 import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
 import { GravarProdutosService } from '../shared/service/gravar-produtos.service';
@@ -75,16 +76,16 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   }
 
   //ajeitar o delete
-  confirmDelete(input: any) {
+  confirmDelete(id: any) {
     this.produtosInseridosService
-      .deleteProduto(this.produtoSelecionado)
+      .deleteProduto(this.produtoSelecionado.map(x => x.id !== id))
       .subscribe(
         (success) => {
-          alert('Produto deletado com sucesso');
+          alert('Produto deletado com sucesso' + success);
           this.deleteModalRef?.hide();
         },
         (error) => {
-          alert('Não foi possível deletar o produto. Tente mais tarde');
+          alert('Não foi possível deletar o produto. Tente mais tarde' + error);
           this.deleteModalRef?.hide();
         }
       );

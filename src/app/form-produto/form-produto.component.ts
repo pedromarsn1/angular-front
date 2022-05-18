@@ -11,6 +11,7 @@ import { Quantidade } from '../quantidade/quantidade.model';
 import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.service';
 import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
 import { GravarProdutosService } from '../shared/service/gravar-produtos.service';
+import { find } from 'rxjs';
 
 @Component({
   selector: 'app-form-produto',
@@ -73,16 +74,15 @@ export class FormProdutoComponent implements OnInit {
     this.produtoForm.controls['id'].setValue(produto.id);
     this.produtoForm.controls['nome'].setValue(produto.nome);
     this.produtoForm.controls['unidade'].setValue(produto.unidade);
-   this.produtoForm.controls['qtdReservada'].setValue(quantidade.quantidade)
+    this.produtoForm.controls['qtdReservada'].setValue(quantidade.quantidade);
     console.log(quantidade, produto);
   }
 
   onSubmit() {
-   let submission = this.produtosInseridosService
+    let submission = this.produtosInseridosService
       .saveProduto(this.produtoForm.value)
       .subscribe(() => {
         (result: any) => result;
-
       });
 
     //para descobrir o problema
@@ -90,32 +90,4 @@ export class FormProdutoComponent implements OnInit {
     this.router.navigate(['/form']);
     this.produtoForm.reset();
   }
-
-  //   deleteProduto(produto: Produto[]) {
-  //     this.produtoSelecionado = produto;
-  //     this.deleteModalRef = this.modalService.show(this.deleteModal, {
-  //       class: 'modal-sm',
-  //     });
-  //   }
-  //
-  //   //ajeitar o delete
-  //   confirmDelete(input: any) {
-  //     this.produtoService.deleteProduto(this.produtoSelecionado).subscribe(
-  //       (success) => {
-  //         alert('Produto deletado com sucesso');
-  //         this.deleteModalRef?.hide();
-  //       },
-  //       (error) => {
-  //         alert('Não foi possível deletar o produto. Tente mais tarde');
-  //         this.deleteModalRef?.hide();
-  //       }
-  //     );
-  //
-  //     this.message = 'Confirmed!';
-  //   }
-  //
-  //   declineDelete(): void {
-  //     this.message = 'Declined!';
-  //     this.deleteModalRef?.hide();
-  //   }
 }

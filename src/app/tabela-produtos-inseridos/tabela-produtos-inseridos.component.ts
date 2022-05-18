@@ -19,7 +19,6 @@ import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.s
   styleUrls: ['./tabela-produtos-inseridos.component.scss'],
 })
 export class TabelaProdutosInseridosComponent implements OnInit {
-  searchText: any;
   produtos: ProdutosInseridos[] = [];
   @ViewChild('deleteModal') deleteModal: any;
   message?: string;
@@ -36,11 +35,11 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.myForm = this.fb.group({
-      id: ['', [Validators.required]],
-      codProduto: ['', [Validators.required]],
-      qtdEstocada: ['', [Validators.required]],
-    });
+     this.myForm = new FormGroup({
+       id: new FormControl(['', [Validators.required]]),
+       codProduto: new FormControl(['', [Validators.required]]),
+       qtdEstocada: new FormControl(['', [Validators.required]]),
+     });
 
     this.produtosInseridosService
       .getAll()
@@ -49,23 +48,17 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   }
 
   gravar() {
-    this.gravarProdutoService.updateProduto(this.myForm.value).subscribe(() => {
-      (result: any) => result;
-      (response: any) => {
-        this.produtos = response;
-      };
-    });
-
-    console.log(
-      this.gravarProdutoService
-        .updateProduto(this.myForm.value)
-        .subscribe(() => {
+       let gravar = this.gravarProdutoService.updateProduto(this.myForm.value).subscribe(() => {
           (result: any) => result;
-        })
-    );
+          (response: any) => {
+            this.produtos = response;
+          };
+        });
+
+        console.log(gravar);
 
     this.router.navigate(['/form']);
-    this.myForm.reset();
+     this.myForm.reset();
   }
 
   deleteProduto(produto: ProdutosInseridos[]) {
@@ -78,7 +71,7 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   //ajeitar o delete
   confirmDelete(id: any) {
     this.produtosInseridosService
-      .deleteProduto(this.produtoSelecionado.map(x => x.id !== id))
+      .deleteProduto(this.produtoSelecionado.filter((x) => x.id == id))
       .subscribe(
         (success) => {
           alert('Produto deletado com sucesso' + success);

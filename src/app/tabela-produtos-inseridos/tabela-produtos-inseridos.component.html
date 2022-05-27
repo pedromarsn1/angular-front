@@ -4,26 +4,13 @@
   }
 </style>
 
-<!--
-<div class="p-3" ng-controller="myController">
-  <form class="d-flex p-3">
-    <input
-      class="form-control me-2"
-      type="search"
-      placeholder="Procurar por código do cliente..."
-      aria-label="Buscar"
-      [(ngModel)]="searchText"
-      name="searchText"
-    />
-
-  </form>
-</div>
-
--->
-
 <div class="card">
   <div class="card-body">
-    <form method="post" (ngSubmit)="gravar()" [formGroup]="myForm">
+    <form
+      method="post"
+      [formGroup]="myForm"
+      (ngSubmit)="gravar(produtosGrav)"
+    >
       <table class="table p-3" method="post">
         <thead class="thead-dark">
           <tr>
@@ -58,23 +45,23 @@
             </td>
             <td>
               <button
-              type="button"
-              class="btn btn-danger btn-sm ml-1"
-              (click)="deleteProduto(produtos)"
-            >
-              Deletar
-            </button>
+                type="button"
+                class="btn btn-danger btn-sm ml-1"
+                (click)="deleteProduto(produto)"
+              >
+                Deletar
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
       <button
-      type="button"
-      class="btn btn-success col-sm-1 p-2"
-      (click)="gravar()"
-    >
-      Gravar
-    </button>
+        type="button"
+        class="btn btn-success col-sm-1 p-2"
+        (click)="gravar(produtosGrav)"
+      >
+        Gravar
+      </button>
     </form>
   </div>
 </div>
@@ -82,7 +69,11 @@
 <ng-template #deleteModal>
   <div class="modal-body text-center">
     <p>Tem certeza que deseja remover este produto?</p>
-    <button type="button" class="btn btn-default" (click)="confirmDelete($event)">
+    <button
+      type="button"
+      class="btn btn-default"
+      (click)="confirmDelete($event)"
+    >
       Sim
     </button>
     <button type="button" class="btn btn-primary" (click)="declineDelete()">

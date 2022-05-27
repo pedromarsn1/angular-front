@@ -45,7 +45,7 @@ export class FormProdutoComponent implements OnInit {
   ngOnInit(): void {
     this.produtoForm = this.fb.group({
       id: ['', [Validators.required]],
-      codProduto: ['', [Validators.required]],
+      codProduto: ['', [Validators.minLength(4)]],
       qtdEstocada: ['', [Validators.required]],
       qtdReservada: ['', [Validators.required]],
       nome: ['', [Validators.required]],

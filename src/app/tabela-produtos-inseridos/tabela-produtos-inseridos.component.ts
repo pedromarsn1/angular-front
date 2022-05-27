@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { identity } from 'rxjs';
+import { GravarProdutos } from '../gravar-produtos/gravar-produtos.model';
 
 import { ProdutosInseridos } from '../produtos/produto/produtos-inseridos.model';
 import { GravarProdutosService } from '../shared/service/gravar-produtos.service';
@@ -20,11 +21,13 @@ import { ProdutosInseridosService } from '../shared/service/produtos-inseridos.s
 })
 export class TabelaProdutosInseridosComponent implements OnInit {
   produtos: ProdutosInseridos[] = [];
+  produtosGrav: GravarProdutos[] = [];
   @ViewChild('deleteModal') deleteModal: any;
   message?: string;
   @Input() produtoSelecionado: ProdutosInseridos[] = [];
   public myForm!: FormGroup;
   deleteModalRef?: BsModalRef;
+  produtoDeletar?: ProdutosInseridos;
 
   constructor(
     private fb: FormBuilder,
@@ -35,11 +38,11 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-     this.myForm = new FormGroup({
-       id: new FormControl(['', [Validators.required]]),
-       codProduto: new FormControl(['', [Validators.required]]),
-       qtdEstocada: new FormControl(['', [Validators.required]]),
-     });
+    this.myForm = this.fb.group({
+      id: ['', [Validators.required]],
+      codProduto: ['', [Validators.required]],
+      qtdEstocada: ['', [Validators.required]],
+    });
 
     this.produtosInseridosService
       .getAll()
@@ -47,22 +50,27 @@ export class TabelaProdutosInseridosComponent implements OnInit {
     this.produtosInseridosService.deleteProduto;
   }
 
-  gravar() {
-       let gravar = this.gravarProdutoService.updateProduto(this.myForm.value).subscribe(() => {
-          (result: any) => result;
-          (response: any) => {
-            this.produtos = response;
-          };
-        });
+  gravar(produtosGrav : GravarProdutos[]) {
+    this.produtosGrav = produtosGrav;
 
-        console.log(gravar);
+  // let gravar = this.gravarProdutoService
+  //   .updateProduto(this.produtosGrav[].qtdEstocada)
+  //   .subscribe(() => {
+  //     (result: any) => result;
+  //     (response: any) => {
+  //       this.produtos = response;
+  //     };
+  //   });
 
-    this.router.navigate(['/form']);
-     this.myForm.reset();
+  // console.log(gravar);
+
+  // this.router.navigate(['/form']);
+
+  // console.log(this.produtosInseridosService.deleteAll(this.produtos));
   }
 
-  deleteProduto(produto: ProdutosInseridos[]) {
-    this.produtoSelecionado = produto;
+  deleteProduto(produto: ProdutosInseridos) {
+    this.produtoDeletar = produto;
     this.deleteModalRef = this.modalService.show(this.deleteModal, {
       class: 'modal-sm',
     });
@@ -71,7 +79,7 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   //ajeitar o delete
   confirmDelete(id: any) {
     this.produtosInseridosService
-      .deleteProduto(this.produtoSelecionado.filter((x) => x.id == id))
+      .deleteProduto(this.produtoDeletar?.id)
       .subscribe(
         (success) => {
           alert('Produto deletado com sucesso' + success);

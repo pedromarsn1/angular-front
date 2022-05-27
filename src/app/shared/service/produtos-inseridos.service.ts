@@ -69,4 +69,8 @@ export class ProdutosInseridosService {
   deleteProduto(id: any) {
     return this.httpClient.delete(this.apiUrl + '/' + id).pipe(take(1));
   }
+
+  deleteAll(produto : ProdutosInseridos[]){
+    this.httpClient.delete(this.apiUrl + '/delete-all').pipe(take(1))
+  }
 }

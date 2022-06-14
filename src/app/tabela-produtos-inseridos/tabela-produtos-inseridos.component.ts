@@ -35,38 +35,46 @@ export class TabelaProdutosInseridosComponent implements OnInit {
     private gravarProdutoService: GravarProdutosService,
     private router: Router,
     private modalService: BsModalService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
       id: ['', [Validators.required]],
+      idProduto: ['',[Validators.required]],
       codProduto: ['', [Validators.required]],
       qtdEstocada: ['', [Validators.required]],
     });
 
-    this.produtosInseridosService
-      .getAll()
-      .subscribe((dados) => (this.produtos = dados));
+    this.resetProdutos();
     this.produtosInseridosService.deleteProduto;
   }
 
-  gravar(produtosGrav : GravarProdutos[]) {
+  resetProdutos(): void {
+    this.produtosInseridosService
+      .getAll()
+      .subscribe((dados) => (this.produtos = dados));
+  }
+
+  gravar(produtosGrav: GravarProdutos[]) {
     this.produtosGrav = produtosGrav;
 
-  // let gravar = this.gravarProdutoService
-  //   .updateProduto(this.produtosGrav[].qtdEstocada)
-  //   .subscribe(() => {
-  //     (result: any) => result;
-  //     (response: any) => {
-  //       this.produtos = response;
-  //     };
-  //   });
+    for(let produto of produtosGrav){
+      this.gravarProdutoService
+        .updateProduto(produto)
+        .subscribe(() => {
+          (result: any) => result;
+          (response: any) => {
+            this.produtos = response;
+          };
+        });
+      }
 
-  // console.log(gravar);
-
-  // this.router.navigate(['/form']);
-
-  // console.log(this.produtosInseridosService.deleteAll(this.produtos));
+    this.produtosInseridosService.deleteAll().subscribe(() => {
+      (result: any) => result;
+      (response: any) => {
+        this.resetProdutos();
+      }
+    })
   }
 
   deleteProduto(produto: ProdutosInseridos) {

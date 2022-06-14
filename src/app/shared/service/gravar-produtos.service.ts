@@ -36,7 +36,7 @@ export class GravarProdutosService {
 
   updateProduto(gravarProdutos: GravarProdutos): Observable<GravarProdutos> {
     return this.httpClient.put<GravarProdutos>(
-      this.apiUrl + '/' + gravarProdutos.id,
+      this.apiUrl + '/' + gravarProdutos.idProduto,
       gravarProdutos,
       this.httpOptions
     );

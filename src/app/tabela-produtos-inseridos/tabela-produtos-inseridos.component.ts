@@ -49,12 +49,15 @@ export class TabelaProdutosInseridosComponent implements OnInit {
     this.produtosInseridosService.deleteProduto;
   }
 
+
+  //Usado para limpar os produtos
   resetProdutos(): void {
     this.produtosInseridosService
       .getAll()
       .subscribe((dados) => (this.produtos = dados));
   }
 
+  //atualiza os produtos e reseta a tabela
   gravar(produtosGrav: GravarProdutos[]) {
     this.produtosGrav = produtosGrav;
 
@@ -77,6 +80,7 @@ export class TabelaProdutosInseridosComponent implements OnInit {
     })
   }
 
+  //deleta os produtos
   deleteProduto(produto: ProdutosInseridos) {
     this.produtoDeletar = produto;
     this.deleteModalRef = this.modalService.show(this.deleteModal, {
@@ -84,7 +88,7 @@ export class TabelaProdutosInseridosComponent implements OnInit {
     });
   }
 
-  //ajeitar o delete
+  //abre caixa de diálogo
   confirmDelete(id: any) {
     this.produtosInseridosService
       .deleteProduto(this.produtoDeletar?.id)

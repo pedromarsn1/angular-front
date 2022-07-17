@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import { GravarProdutos } from 'src/app/gravar-produtos/gravar-produtos.model';
+import { ProdutosInseridos } from 'src/app/produtos/produto/produtos-inseridos.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class GravarProdutosService {
     }),
   };
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getAll() {
     return this.httpClient.get<GravarProdutos[]>(this.apiUrl);
@@ -34,11 +35,11 @@ export class GravarProdutosService {
     );
   }
 
-  updateProduto(gravarProdutos: GravarProdutos): Observable<GravarProdutos> {
-    return this.httpClient.put<GravarProdutos>(
-      this.apiUrl + '/' + gravarProdutos.idProduto,
-      gravarProdutos,
-      this.httpOptions
+  updateProduto(gravarProdutos: ProdutosInseridos): Observable<ProdutosInseridos> {
+    console.log(gravarProdutos)
+    return this.httpClient.put<ProdutosInseridos>(
+      this.apiUrl + '/' + gravarProdutos.idProd,
+      gravarProdutos
     );
   }
 

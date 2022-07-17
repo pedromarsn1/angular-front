@@ -1,6 +1,6 @@
 export interface ProdutosInseridos {
   id? : number
-  idProduto?: number
+  idProd?: number
   nome: string
   codProduto: number
   qtdEstocada: number

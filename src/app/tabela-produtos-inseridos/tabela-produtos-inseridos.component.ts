@@ -58,10 +58,8 @@ export class TabelaProdutosInseridosComponent implements OnInit {
   }
 
   //atualiza os produtos e reseta a tabela
-  gravar(produtosGrav: GravarProdutos[]) {
-    this.produtosGrav = produtosGrav;
-
-    for(let produto of produtosGrav){
+  gravar() {
+    for(let produto of this.produtos){
       this.gravarProdutoService
         .updateProduto(produto)
         .subscribe(() => {

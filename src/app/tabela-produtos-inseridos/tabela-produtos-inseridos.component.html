@@ -9,7 +9,7 @@
     <form
       method="post"
       [formGroup]="myForm"
-      (ngSubmit)="gravar(produtosGrav)"
+      (ngSubmit)="gravar()"
     >
       <table class="table p-3" method="post">
         <thead class="thead-dark">
@@ -35,7 +35,7 @@
                 type="hidden"
                 name="idProduto"
                 formControlName="idProduto"
-              />{{ produto.idProduto }}
+              />{{ produto.idProd }}
             </td>
             <td>{{ produto.nome }}</td>
             <td>{{ produto.unidade }}</td>
@@ -65,7 +65,7 @@
       <button
         type="button"
         class="btn btn-success col-sm-1 p-2"
-        (click)="gravar(produtosGrav)"
+        (click)="gravar()"
       >
         Gravar
       </button>

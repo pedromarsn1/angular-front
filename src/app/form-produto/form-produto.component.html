@@ -94,6 +94,16 @@
           readonly
         />
       </div>
+      <div class="col-md-2 p-3">
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="idProduto"
+          (change)="filterProductByCode($event)"
+          name="idProduto"
+          readonly
+        />
+      </div>
       <div>
         <!--*ngFor="let produtoInserido of produtosInseridos"-->
         <button type="button" class="btn btn-primary" (click)="onSubmit()">

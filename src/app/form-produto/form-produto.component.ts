@@ -73,6 +73,7 @@ export class FormProdutoComponent implements OnInit {
 
     this.produtoForm.controls['id'].setValue(produto.id);
     this.produtoForm.controls['nome'].setValue(produto.nome);
+    this.produtoForm.controls['idProduto'].setValue(quantidade.idproduto)
     this.produtoForm.controls['unidade'].setValue(produto.unidade);
     this.produtoForm.controls['qtdReservada'].setValue(quantidade.quantidade);
     console.log(quantidade, produto);
